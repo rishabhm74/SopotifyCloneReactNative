@@ -7,22 +7,27 @@ import {
   Text,
   StatusBar,
 } from 'react-native';
+import AuthStackStack from './navigation/AuthStack';
+import { NavigationContainer } from '@react-navigation/native';
 
-import LoginGreetScreen from './screens/LoginGreetScreen';
-
+import AuthStack from './navigation/AuthStack';
 
 const App = () => {
   
   return (
-    <View style={styles.mainAppView}>
-      <LoginGreetScreen />
-    </View>
+    <NavigationContainer>
+      <View style={styles.mainAppView}>
+        <AuthStack />
+      </View>
+    </NavigationContainer>
   )
 }
 
 const styles = StyleSheet.create({
   mainAppView: {
-    flex: 1
+    flex: 1,
+    width: '100%',
+    backgroundColor: '#141414'
   }
 })
 

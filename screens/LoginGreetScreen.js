@@ -7,10 +7,18 @@ import {
   Text,
   StatusBar,
   Image,
-  TouchableNativeFeedback
+  TouchableNativeFeedback,
+  Dimensions
 } from 'react-native';
 
-const LoginGreetScreen = () => {
+
+
+const screenWidth = Dimensions.get('window').width;
+const screenHeight = Dimensions.get('window').height;
+
+
+
+const LoginGreetScreen = ({navigation}) => {
   return (
     <ScrollView 
       style={styles.loginGreetScreenView} 
@@ -37,7 +45,7 @@ const LoginGreetScreen = () => {
         </Text>
       </View>
       <View style={styles.buttonsContainer}>
-        <TouchableNativeFeedback>
+        <TouchableNativeFeedback onPress={() => navigation.navigate('SignUp')}>
           <View style={styles.signUpFreeButton}>
             <Text style={styles.signUpFreeButtonText}>
               Sign up free
@@ -109,6 +117,7 @@ const styles = StyleSheet.create({
   },
   loginGreetImgContainer: {
     width: '100%',
+    // height: screenHeight > 640 ? 300 : 250,
     height: 300,
     overflow: 'hidden',
     justifyContent: 'center',
@@ -116,12 +125,13 @@ const styles = StyleSheet.create({
     flexDirection: 'column'
   },
   loginGreetImgContainerImg: {
-    height: 300,
+    height: '100%',
     width: '100%'
   },
   loginGreetScreenViewTagLineContainer: {
     width: '100%',
-    height: 300,
+    height: screenHeight > 640 ? 300 : 280,
+    // height: 300,
     // backgroundColor: '#ff00003f',
     position: 'absolute',
     top: 0,
@@ -143,18 +153,25 @@ const styles = StyleSheet.create({
   },
   buttonsContainer: {
     height: 'auto',
-    minHeight: 350,
-    paddingTop: 60,
+    // minHeight: 350,
+    minHeight: screenHeight > 640 ? 350 : 260,
+    // paddingTop: 60,
+    paddingTop: screenHeight > 640 ? 60 : 40,
     width: '100%',
     // backgroundColor: 'red',
     alignItems: 'center',
-    flexDirection: 'column'
+    flexDirection: 'column',
+    // paddingBottom: 50,
+    paddingBottom: screenHeight > 640 ? 50 : 30,
   },
   signUpFreeButton: {
-    width: 310,
-    height: 55,
+    width: screenHeight > 640 ? 310 : 290,
+    // width: 310,
+    height: screenHeight > 640 ? 50 : 45,
+    // height: 50,
     borderRadius: 55,
-    backgroundColor: '#1ed761',
+    backgroundColor: '#1db954',
+    // backgroundColor: '#1ed761',
     marginBottom: 10,
     justifyContent: 'center',
     alignItems: 'center'
@@ -165,8 +182,10 @@ const styles = StyleSheet.create({
     fontSize: 16
   },
   signUpButtons: {
-    width: 310,
-    height: 55,
+    width: screenHeight > 640 ? 310 : 290,
+    // width: 310,
+    height: screenHeight > 640 ? 50 : 45,
+    // height: 50,
     borderRadius: 55,
     marginBottom: 10,
     borderWidth: 1,
@@ -177,8 +196,9 @@ const styles = StyleSheet.create({
     overflow: 'hidden'
   },
   signUpButtonsLogo: {
-    height: 20,
-    width: 20
+    height: screenHeight > 640 ? 20 : 17,
+    width: screenHeight > 640 ? 20 : 17,
+    // width: 20
   },
   signUpButtonsIconLogoContainer: {
     width: '20%',
@@ -209,10 +229,10 @@ const styles = StyleSheet.create({
     // alignItems: 'flex-start',
     // backgroundColor: 'red',
     // paddingLeft: '7%'
-    paddingRight: '17.5%'
+    paddingRight: '16.5%'
   },
   signUpButtonsLoginButton: {
-    marginTop: 10,
+    marginTop: 12.5,
     // width:150,
     // height: 55,
     // justifyContent: 'center',
