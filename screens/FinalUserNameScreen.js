@@ -21,15 +21,15 @@ import { useNavigation } from '@react-navigation/native';
 const screenWidth = Dimensions.get('window').width;
 const screenHeight = Dimensions.get('window').height;
 
-const CreatePasswordScreen = () => {
-  const [password, setPassword] = useState('');
+const FinalUserNameScreen = () => {
+  const [userName, setUserName] = useState('');
   const [nextState, setNextState] = useState(true)
 
   const navigation = useNavigation();
 
   const moveToGenderPage = () => {
-    if (password.length >= 8) {
-      return navigation.navigate('UserGender')
+    if (userName.length >= 8) { 
+      return navigation.navigate('LoginGreet')
     }
   }
   
@@ -38,56 +38,62 @@ const CreatePasswordScreen = () => {
       <AuthStackHeader />
       <View style={styles.signUpScreen}>
         <Text style={styles.whatsYourEmailText}>
-          Create a password
+          What's your name?
         </Text>
         <TextInput 
-          onChangeText={(password) => setPassword(password)}
+          onChangeText={(userName) => setUserName(userName)}
           style={styles.emailInputBar}
           autoCapitalize="none"
           autoCorrect={false}
-          secureTextEntry={true}
-          value={password}
-          autoFocus={true}
+          value={userName}
         />
         <Text style={styles.confirmEmailText}>
-          Use at least 8 characters.
+         This appears on your Spotify profile.
         </Text>
       </View>
 
-
       <View>
-        {
-          password.length >= 8 ?
-          <TouchableNativeFeedback
+          {userName.length  > 0 ?
+            <TouchableNativeFeedback
             disabled={false}
-            onPress={moveToGenderPage}
-          >
-            <View 
-              style={styles.emailNextButtonViewNotDisabled}
+              onPress={moveToGenderPage}
             >
-              <Text style={styles.emailNextButtonTextNotDisabled}>
-                NEXT
-              </Text>
-            </View>
-          </TouchableNativeFeedback> :
-          <TouchableNativeFeedback
-            disabled={true}
-            onPress={moveToGenderPage}
-          >
-            <View 
-              style={styles.emailNextButtonViewDisabled  }
+              <View 
+                style={styles.emailNextButtonViewNotDisabled}
+              >
+                <Text style={styles.emailNextButtonTextNotDisabled}>
+                  CREATE
+                </Text>
+              </View>
+            </TouchableNativeFeedback> :
+            <TouchableNativeFeedback
+              disabled={true}
+              onPress={moveToGenderPage}
             >
-              <Text style={styles.emailNextButtonTextDisabled}>
-                NEXT
-              </Text>
-            </View>
-          </TouchableNativeFeedback>
-
-
-
-        }
+              <View 
+                style={styles.emailNextButtonViewDisabled  }
+              >
+                <Text style={styles.emailNextButtonTextDisabled}>
+                  CREATE
+                </Text>
+              </View>
+            </TouchableNativeFeedback>
+          }
       </View>
-      
+      <View style={styles.termsAndConditionContainer}>
+        <Text style={styles.termsAndConditionText}>
+          By creating an account, you agree to Spotify's <Text style={styles.termsAndConditionTextUnderline}>Terms of Service</Text>.
+        </Text>
+        <Text style={styles.termsAndConditionText}>
+          To learn more about how Spotify collects, uses, shares and protects your personal, data please read Spotify's <Text style={styles.termsAndConditionTextUnderline}>Privacy Policy</Text>.
+        </Text>
+        <Text style={styles.termsAndConditionText}>
+          We may occasionally send you service-based messages.
+        </Text>
+      </View>
+      <Text style={styles.recaptchaText}>
+        PROTECTED BY RECAPTCHA
+      </Text>
 
     </View>
   )
@@ -101,7 +107,7 @@ const styles = StyleSheet.create({
   }, 
   signUpScreen: {
     width: screenWidth,
-    height: screenHeight > 640 ? 185 : 165,
+    height: screenHeight > 640 ? 180 : 160,
     // backgroundColor: 'red',
     flexDirection: 'column',
     alignItems: 'flex-start',
@@ -111,7 +117,7 @@ const styles = StyleSheet.create({
   whatsYourEmailText: {
     color: '#fff',
     fontFamily: 'Product Sans Bold 700',
-    fontSize: 23,
+    fontSize: 22,
     marginBottom: screenHeight > 640 ? 12 : 10
   },
   emailInputBar: {
@@ -132,32 +138,31 @@ const styles = StyleSheet.create({
   },
   emailNextButtonViewNotDisabled: {
     backgroundColor: '#fff',
-    width: 130,
+    width: 155,
     justifyContent: 'center',
     alignItems: 'center',
     height: screenHeight > 640 ? 47 : 43,
     borderRadius: 80,
     marginLeft: 'auto',
     marginRight: 'auto',
-    marginTop: 12,
+    marginTop: 10,
   },
   emailNextButtonTextNotDisabled: {
     fontSize: 16,
     color: '#000',
     fontFamily: 'Product Sans Bold 700',
     textTransform: 'uppercase',
-
   },
   emailNextButtonViewDisabled: {
     backgroundColor: '#616060',
-    width: 130,
+    width: 155,
     justifyContent: 'center',
     alignItems: 'center',
     height: screenHeight > 640 ? 47 : 43,
     borderRadius: 80,
     marginLeft: 'auto',
     marginRight: 'auto',
-    marginTop: 12,
+    marginTop: 10,
   },
   emailNextButtonTextDisabled: {
     fontSize: 16,
@@ -166,7 +171,35 @@ const styles = StyleSheet.create({
     textTransform: 'uppercase',
 
   },
+  termsAndConditionContainer: {
+    width: '100%',
+    height: screenHeight > 640 ? 155 : 135,
+    // backgroundColor: 'red',
+    marginTop: 30,
+    padding: 25,
+    paddingTop: 0
+  },
+  termsAndConditionText: {
+    fontSize: 12,
+    color: '#fff',
+    fontFamily: 'Product Sans Bold 700',
+    textAlign: 'center',
+    marginBottom: 20
+  },
+  termsAndConditionTextUnderline: {
+    textDecorationStyle: 'solid',
+    textDecorationColor: '#fff',
+    textDecorationLine: 'underline'
+  },
+  recaptchaText: {
+    marginLeft: 'auto',
+    marginRight: 'auto',
+    color: '#ffffff50',
+    fontSize: 11,
+    
+    letterSpacing: 0.25
+  }
 })
 
 
-export default CreatePasswordScreen;
+export default FinalUserNameScreen;

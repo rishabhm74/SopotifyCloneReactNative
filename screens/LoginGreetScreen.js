@@ -45,7 +45,7 @@ const LoginGreetScreen = ({navigation}) => {
         </Text>
       </View>
       <View style={styles.buttonsContainer}>
-        <TouchableNativeFeedback onPress={() => navigation.navigate('SignUpEmail')}>
+        <TouchableNativeFeedback onPress={() => navigation.navigate('SignUpWithEmailStackMain')}>
           <View style={styles.signUpFreeButton}>
             <Text style={styles.signUpFreeButtonText}>
               Sign up free
@@ -130,7 +130,7 @@ const styles = StyleSheet.create({
   },
   loginGreetScreenViewTagLineContainer: {
     width: '100%',
-    height: screenHeight > 640 ? 300 : 280,
+    height: screenHeight > 640 ? 295 : 280,
     // height: 300,
     // backgroundColor: '#ff00003f',
     position: 'absolute',

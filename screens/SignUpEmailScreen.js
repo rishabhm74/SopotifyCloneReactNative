@@ -27,11 +27,13 @@ const SignUpEmailScreen = () => {
 
   const navigation = useNavigation();
 
+  const reg = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 
   const moveToCreatePassword = () => {
-    if (email.length !== 0) {
-      // setNextState(!true);
-      return navigation.navigate('CreatePassword')
+    if (email.length > 0) {
+      if (reg.test(email) === true){
+        return navigation.navigate('CreatePassword');
+      } 
     }
   }
   
@@ -48,6 +50,8 @@ const SignUpEmailScreen = () => {
           keyboardType='email-address'
           autoCapitalize="none"
           autoCorrect={false}
+          value={email}
+          autoFocus={true}
         />
         <Text style={styles.confirmEmailText}>
           You'll need to confirm this email later.
@@ -57,7 +61,7 @@ const SignUpEmailScreen = () => {
 
       <View>
         {
-          email.length > 0 ?
+          email.length > 0 && reg.test(email) === true ?
           <TouchableNativeFeedback
             disabled={false}
             onPress={moveToCreatePassword}
@@ -112,7 +116,7 @@ const styles = StyleSheet.create({
     color: '#fff',
     fontFamily: 'Product Sans Bold 700',
     fontSize: 30,
-    marginBottom: 12
+    marginBottom: screenHeight > 640 ? 12 : 10
   },
   emailInputBar: {
     backgroundColor: '#616060',
@@ -123,7 +127,7 @@ const styles = StyleSheet.create({
     fontSize: 16,
     color: '#fff',
     fontFamily: 'Product-Sans-Regular',
-    marginBottom: 12
+    marginBottom: screenHeight > 640 ? 12 : 10
   },
   confirmEmailText: {
     fontSize: 13,

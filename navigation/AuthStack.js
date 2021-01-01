@@ -13,9 +13,11 @@ import {
 import { createStackNavigator } from '@react-navigation/stack';
 
 import LoginGreetScreen from '../screens/LoginGreetScreen';
-import SignUpScreen from '../screens/SignUpScreen';
-import SignUpEmailScreen from '../screens/SignUpEmailScreen';
-import CreatePasswordScreen from '../screens/CreatePasswordScreen';
+// import SignUpScreen from '../screens/SignUpScreen';
+// import SignUpEmailScreen from '../screens/SignUpEmailScreen';
+// import CreatePasswordScreen from '../screens/CreatePasswordScreen';
+// import DateOfBirthScreen from '../screens/DateOfBirthScreen';
+import SignUpWithEmailStack from './SignUpWithEmailStack';
 
 
 
@@ -32,27 +34,14 @@ const AuthStack = ({navigation}) => {
         component={LoginGreetScreen}
         options={{header: () => null}}
       />
-      {/* <AuthStackStack.Screen
-        name="SignUp"
-        component={SignUpScreen}
-        options={{ 
-          header: () => null
-        }}
-      /> */}
       <AuthStackStack.Screen
-        name="SignUpEmail"
-        component={SignUpEmailScreen}
+        name="SignUpWithEmailStackMain"
+        component={SignUpWithEmailStack}
         options={{ 
           header: () => null
         }}
       />
-      <AuthStackStack.Screen
-        name="CreatePassword"
-        component={CreatePasswordScreen}
-        options={{ 
-          header: () => null
-        }}
-      />
+      
     </AuthStackStack.Navigator>
   )
 }
