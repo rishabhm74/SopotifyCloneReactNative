@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import {
   SafeAreaView,
   StyleSheet,
@@ -16,6 +16,7 @@ import {
 
 import LoginHeader from '../components/LoginHeader';
 import { useNavigation } from '@react-navigation/native';
+import { AuthContext } from '../AuthProvider';
 
 
 const screenWidth = Dimensions.get('window').width;
@@ -26,6 +27,8 @@ const LoginScreen = () => {
   const [loginPassword, setLoginPassword] = useState('');
   const [nextState, setNextState] = useState(true)
 
+  const { login } = useContext(AuthContext)
+
   const navigation = useNavigation();
 
   const reg = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
@@ -33,7 +36,8 @@ const LoginScreen = () => {
   const moveToCreatePassword = () => {
     if (loginEmail.length > 0) {
       if (reg.test(loginEmail) === true){
-        return navigation.navigate('LoginGreet');
+        // return navigation.navigate('LoginGreet');
+        return login(loginEmail, loginPassword);
       } 
     }
   }
@@ -125,11 +129,11 @@ const styles = StyleSheet.create({
   }, 
   spacer: {
     width: screenWidth,
-    height: screenHeight > 640 ? 25 : 25,
+    height: screenHeight > 640 ? 15 : 15,
   },
   signUpScreen: {
     width: screenWidth,
-    height: screenHeight > 640 ? 280 : 244,
+    height: screenHeight > 640 ? 270 : 234,
     // backgroundColor: 'red',
     flexDirection: 'column',
     alignItems: 'flex-start',
@@ -177,7 +181,9 @@ const styles = StyleSheet.create({
 
   },
   emailNextButtonViewDisabled: {
-    backgroundColor: '#616060',
+    // backgroundColor: '#616060',
+    backgroundColor: '#fff',
+    opacity: 0.5,
     width: 150,
     justifyContent: 'center',
     alignItems: 'center',

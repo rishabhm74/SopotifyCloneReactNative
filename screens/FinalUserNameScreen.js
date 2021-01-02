@@ -36,7 +36,7 @@ const FinalUserNameScreen = ({ route }) => {
   const moveToGenderPage = () => {
     if (userName.length > 0) { 
       // return navigation.navigate('LoginGreet')
-      register(userEmail, userPassword);
+      return register(userEmail, userPassword);
     }
   }
   
