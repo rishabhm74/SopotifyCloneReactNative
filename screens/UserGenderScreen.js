@@ -22,10 +22,14 @@ import { useNavigation } from '@react-navigation/native';
 const screenWidth = Dimensions.get('window').width;
 const screenHeight = Dimensions.get('window').height;
 
-const UserGenderScreen = ({navigation}) => {
+const UserGenderScreen = ({ route }) => {
   const [genderSelected, setGenderSelected] = useState(false);
   const [selectedGenderType, setSelectedGenderType] = useState('');
-  
+
+  const { userEmail, userPassword } = route.params;
+
+  const navigation = useNavigation();
+
   const selectedGenderTypeHandler = (type) => {
     if (!genderSelected) {
       // if ( selectedGenderType !== type ) {
@@ -35,15 +39,30 @@ const UserGenderScreen = ({navigation}) => {
       if ( type === 'female' ) {
         setGenderSelected(!genderSelected);
         setSelectedGenderType('female');
+        return navigation.navigate('FinalUserName', {
+          userEmail: userEmail,
+          userPassword: userPassword,
+          userGender: 'female'
+        });
       } else if ( type === 'male' ) {
         setGenderSelected(!genderSelected);
         setSelectedGenderType('male');
+        return navigation.navigate('FinalUserName', {
+          userEmail: userEmail,
+          userPassword: userPassword,
+          userGender: 'male'
+        });
       } else if ( type === 'non-binary' ) {
         setGenderSelected(!genderSelected);
         setSelectedGenderType('non-binary');
+        return navigation.navigate('FinalUserName', {
+          userEmail: userEmail,
+          userPassword: userPassword,
+          userGender: 'non-binary'
+        });
       }
     } 
-    return navigation.navigate('FinalUserName');
+    
   }
 
   return (
@@ -83,6 +102,7 @@ const UserGenderScreen = ({navigation}) => {
           </TouchableOpacity>
         </View>
       </View>
+
     </View>
   )
 }

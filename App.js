@@ -1,34 +1,8 @@
 import React from 'react';
-import {
-  SafeAreaView,
-  StyleSheet,
-  ScrollView,
-  View,
-  Text,
-  StatusBar,
-} from 'react-native';
-import AuthStackStack from './navigation/AuthStack';
-import { NavigationContainer } from '@react-navigation/native';
+import Providers from './Providers';
 
-import AuthStack from './navigation/AuthStack';
-
-const App = () => {
-  
+export default App = () => {
   return (
-    <NavigationContainer>
-      <View style={styles.mainAppView}>
-        <AuthStack />
-      </View>
-    </NavigationContainer>
+    <Providers />
   )
 }
-
-const styles = StyleSheet.create({
-  mainAppView: {
-    flex: 1,
-    width: '100%',
-    backgroundColor: '#141414'
-  }
-})
-
-export default App;

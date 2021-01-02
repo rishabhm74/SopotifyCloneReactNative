@@ -14,15 +14,16 @@ import {
   TextInput
 } from 'react-native';
 
-import AuthStackHeader from '../components/AuthStackHeader';
+import LoginHeader from '../components/LoginHeader';
 import { useNavigation } from '@react-navigation/native';
 
 
 const screenWidth = Dimensions.get('window').width;
 const screenHeight = Dimensions.get('window').height;
 
-const SignUpEmailScreen = () => {
-  const [email, setEmail] = useState('');
+const LoginScreen = () => {
+  const [loginEmail, setLoginEmail] = useState('');
+  const [loginPassword, setLoginPassword] = useState('');
   const [nextState, setNextState] = useState(true)
 
   const navigation = useNavigation();
@@ -30,40 +31,49 @@ const SignUpEmailScreen = () => {
   const reg = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 
   const moveToCreatePassword = () => {
-    if (email.length > 0) {
-      if (reg.test(email) === true){
-        return navigation.navigate('CreatePassword', {
-          userEmail: email
-        });
+    if (loginEmail.length > 0) {
+      if (reg.test(loginEmail) === true){
+        return navigation.navigate('LoginGreet');
       } 
     }
   }
   
   return (
     <View style={styles.signUpScreenView}>
-      <AuthStackHeader />
+      <LoginHeader />
       <View style={styles.signUpScreen}>
         <Text style={styles.whatsYourEmailText}>
           What's your email?
         </Text>
         <TextInput 
-          onChangeText={(userEmail) => setEmail(userEmail)}
+          onChangeText={(userLoginEmail) => setLoginEmail(userLoginEmail)}
           style={styles.emailInputBar}
           keyboardType='email-address'
           autoCapitalize="none"
           autoCorrect={false}
-          value={email}
-          autoFocus={true}
+          value={loginEmail}
+          // autoFocus={true}
         />
-        <Text style={styles.confirmEmailText}>
-          You'll need to confirm this email later.
+        <View style={styles.spacer} />
+        <Text style={styles.whatsYourEmailText}>
+          Password
         </Text>
+        <TextInput 
+          onChangeText={(userLoginPassword) => setLoginPassword(userLoginPassword)}
+          style={styles.emailInputBar}
+          // keyboardType='email-address'
+          // autoCapitalize="none"
+          // autoCorrect={false}
+          value={loginPassword}
+          // autoFocus={true}
+          secureTextEntry={true}
+        />
       </View>
 
 
       <View>
         {
-          email.length > 0 && reg.test(email) === true ?
+          loginEmail.length > 0 && loginPassword.length >= 8 && reg.test(loginEmail) === true  ?
           <TouchableNativeFeedback
             disabled={false}
             onPress={moveToCreatePassword}
@@ -72,7 +82,7 @@ const SignUpEmailScreen = () => {
               style={styles.emailNextButtonViewNotDisabled}
             >
               <Text style={styles.emailNextButtonTextNotDisabled}>
-                NEXT
+                LOG IN
               </Text>
             </View>
           </TouchableNativeFeedback> :
@@ -84,7 +94,7 @@ const SignUpEmailScreen = () => {
               style={styles.emailNextButtonViewDisabled  }
             >
               <Text style={styles.emailNextButtonTextDisabled}>
-                NEXT
+                LOG IN
               </Text>
             </View>
           </TouchableNativeFeedback>
@@ -93,6 +103,14 @@ const SignUpEmailScreen = () => {
 
         }
       </View>
+
+      <TouchableNativeFeedback>
+        <View style={styles.loginWithoutPasswordView}>
+          <Text style={styles.loginWithoutPasswordText}>
+            LOG IN WITHOUT PASSWORD
+          </Text>
+        </View>
+      </TouchableNativeFeedback>
       
 
     </View>
@@ -105,9 +123,13 @@ const styles = StyleSheet.create({
     width: '100%',
     backgroundColor: '#141414'
   }, 
+  spacer: {
+    width: screenWidth,
+    height: screenHeight > 640 ? 25 : 25,
+  },
   signUpScreen: {
     width: screenWidth,
-    height: screenHeight > 640 ? 190 : 170,
+    height: screenHeight > 640 ? 280 : 244,
     // backgroundColor: 'red',
     flexDirection: 'column',
     alignItems: 'flex-start',
@@ -118,7 +140,7 @@ const styles = StyleSheet.create({
     color: '#fff',
     fontFamily: 'Product Sans Bold 700',
     fontSize: 30,
-    marginBottom: screenHeight > 640 ? 12 : 10
+    marginBottom: screenHeight > 640 ? 2 : 2
   },
   emailInputBar: {
     backgroundColor: '#616060',
@@ -138,7 +160,7 @@ const styles = StyleSheet.create({
   },
   emailNextButtonViewNotDisabled: {
     backgroundColor: '#fff',
-    width: 130,
+    width: 150,
     justifyContent: 'center',
     alignItems: 'center',
     height: screenHeight > 640 ? 47 : 43,
@@ -156,7 +178,7 @@ const styles = StyleSheet.create({
   },
   emailNextButtonViewDisabled: {
     backgroundColor: '#616060',
-    width: 130,
+    width: 150,
     justifyContent: 'center',
     alignItems: 'center',
     height: screenHeight > 640 ? 47 : 43,
@@ -172,7 +194,25 @@ const styles = StyleSheet.create({
     textTransform: 'uppercase',
 
   },
+  loginWithoutPasswordView: {
+    marginLeft: 'auto',
+    marginRight: 'auto',
+    borderWidth: 1.5,
+    borderColor: '#ffffff50',
+    padding: 4,
+    paddingLeft: 12.5,
+    paddingRight: 12.5,
+    borderRadius: 50,
+    marginTop:  screenHeight > 640 ? 35 : 35
+  },
+  loginWithoutPasswordText: {
+    fontSize: 11,
+    color: '#fff',
+    fontFamily: 'Product Sans Bold 700',
+    textTransform: 'uppercase',
+    letterSpacing: 1.5
+  }
 })
 
 
-export default SignUpEmailScreen;
+export default LoginScreen;

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import {
   SafeAreaView,
   StyleSheet,
@@ -16,20 +16,27 @@ import {
 
 import AuthStackHeader from '../components/AuthStackHeader';
 import { useNavigation } from '@react-navigation/native';
+import { AuthContext } from '../AuthProvider';
 
 
 const screenWidth = Dimensions.get('window').width;
 const screenHeight = Dimensions.get('window').height;
 
-const FinalUserNameScreen = () => {
+const FinalUserNameScreen = ({ route }) => {
   const [userName, setUserName] = useState('');
   const [nextState, setNextState] = useState(true)
+
+  const { userEmail, userPassword, userGender } = route.params;
+
+  const { register } = useContext(AuthContext)
+
 
   const navigation = useNavigation();
 
   const moveToGenderPage = () => {
-    if (userName.length >= 8) { 
-      return navigation.navigate('LoginGreet')
+    if (userName.length > 0) { 
+      // return navigation.navigate('LoginGreet')
+      register(userEmail, userPassword);
     }
   }
   
@@ -55,7 +62,7 @@ const FinalUserNameScreen = () => {
       <View>
           {userName.length  > 0 ?
             <TouchableNativeFeedback
-            disabled={false}
+              disabled={false}
               onPress={moveToGenderPage}
             >
               <View 
@@ -94,6 +101,7 @@ const FinalUserNameScreen = () => {
       <Text style={styles.recaptchaText}>
         PROTECTED BY RECAPTCHA
       </Text>
+
 
     </View>
   )

@@ -45,7 +45,7 @@ const LoginGreetScreen = ({navigation}) => {
         </Text>
       </View>
       <View style={styles.buttonsContainer}>
-        <TouchableNativeFeedback onPress={() => navigation.navigate('SignUpWithEmailStackMain')}>
+        <TouchableNativeFeedback onPress={() => navigation.navigate('SignUpEmail')}>
           <View style={styles.signUpFreeButton}>
             <Text style={styles.signUpFreeButtonText}>
               Sign up free
@@ -97,7 +97,7 @@ const LoginGreetScreen = ({navigation}) => {
             </View>
           </View>
         </TouchableNativeFeedback>
-        <TouchableNativeFeedback>
+        <TouchableNativeFeedback onPress={() => navigation.navigate('Login')}>
           <View style={styles.signUpButtonsLoginButton}>
             <Text style={styles.signUpButtonsText}>
               Log in

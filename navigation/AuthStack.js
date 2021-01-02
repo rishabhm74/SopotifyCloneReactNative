@@ -10,14 +10,17 @@ import {
   TouchableNativeFeedback,
   Button
 } from 'react-native';
-import { createStackNavigator } from '@react-navigation/stack';
+import { createStackNavigator, CardStyleInterpolators } from '@react-navigation/stack';
 
 import LoginGreetScreen from '../screens/LoginGreetScreen';
-// import SignUpScreen from '../screens/SignUpScreen';
-// import SignUpEmailScreen from '../screens/SignUpEmailScreen';
-// import CreatePasswordScreen from '../screens/CreatePasswordScreen';
-// import DateOfBirthScreen from '../screens/DateOfBirthScreen';
-import SignUpWithEmailStack from './SignUpWithEmailStack';
+// import SignUpWithEmailStack from './SignUpWithEmailStack';
+import SignUpEmailScreen from '../screens/SignUpEmailScreen';
+import CreatePasswordScreen from '../screens/CreatePasswordScreen';
+import DateOfBirthScreen from '../screens/DateOfBirthScreen';
+import UserGenderScreen from '../screens/UserGenderScreen';
+import FinalUserNameScreen from '../screens/FinalUserNameScreen';
+import LoginScreen from '../screens/LoginScreen';
+
 
 
 
@@ -28,6 +31,9 @@ const AuthStack = ({navigation}) => {
   return (
     <AuthStackStack.Navigator 
       initialRouteName="LoginGreet"
+      screenOptions={{
+        cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS
+      }}
     >
       <AuthStackStack.Screen
         name="LoginGreet"
@@ -35,8 +41,43 @@ const AuthStack = ({navigation}) => {
         options={{header: () => null}}
       />
       <AuthStackStack.Screen
-        name="SignUpWithEmailStackMain"
-        component={SignUpWithEmailStack}
+        name="SignUpEmail"
+        component={SignUpEmailScreen}
+        options={{ 
+          header: () => null
+        }}
+      />
+      <AuthStackStack.Screen
+        name="CreatePassword"
+        component={CreatePasswordScreen}
+        options={{ 
+          header: () => null
+        }}
+      />
+      {/* <AuthStackStack.Screen
+        name="DateOfBirth"
+        component={DateOfBirthScreen}
+        options={{ 
+          header: () => null
+        }}
+      /> */}
+      <AuthStackStack.Screen
+        name="UserGender"
+        component={UserGenderScreen}
+        options={{ 
+          header: () => null
+        }}
+      />
+      <AuthStackStack.Screen
+        name="FinalUserName"
+        component={FinalUserNameScreen}
+        options={{ 
+          header: () => null
+        }}
+      />
+      <AuthStackStack.Screen
+        name="Login"
+        component={LoginScreen}
         options={{ 
           header: () => null
         }}

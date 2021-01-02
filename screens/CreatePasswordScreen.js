@@ -21,15 +21,21 @@ import { useNavigation } from '@react-navigation/native';
 const screenWidth = Dimensions.get('window').width;
 const screenHeight = Dimensions.get('window').height;
 
-const CreatePasswordScreen = () => {
+const CreatePasswordScreen = ({ route }) => {
   const [password, setPassword] = useState('');
   const [nextState, setNextState] = useState(true)
 
+
+
   const navigation = useNavigation();
+  const { userEmail } = route.params;
 
   const moveToGenderPage = () => {
     if (password.length >= 8) {
-      return navigation.navigate('UserGender')
+      return navigation.navigate('UserGender', {
+        userEmail: userEmail,
+        userPassword: password
+      })
     }
   }
   
@@ -82,13 +88,9 @@ const CreatePasswordScreen = () => {
               </Text>
             </View>
           </TouchableNativeFeedback>
-
-
-
         }
       </View>
       
-
     </View>
   )
 }
