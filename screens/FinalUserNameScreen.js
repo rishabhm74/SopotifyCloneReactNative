@@ -11,7 +11,9 @@ import {
   TouchableNativeFeedback,
   Dimensions,
   Alert,
-  TextInput
+  TextInput,
+  ActivityIndicator,
+  Keyboard
 } from 'react-native';
 
 import AuthStackHeader from '../components/AuthStackHeader';
@@ -26,6 +28,7 @@ const screenHeight = Dimensions.get('window').height;
 const FinalUserNameScreen = ({ route }) => {
   const { userEmail, userPassword, userGender } = route.params;
   const userNameFromEmail = userEmail.substring(0, userEmail.lastIndexOf("@"));
+  const [ loading, setLoading ] = useState(false);
 
   const [userName, setUserName] = useState(userNameFromEmail);
   const [nextState, setNextState] = useState(true)
@@ -45,6 +48,8 @@ const FinalUserNameScreen = ({ route }) => {
         email: userEmail,
         gender: userGender
       });
+      Keyboard.dismiss();
+      setLoading(!loading);
       return register(userEmail, userPassword);
     }
   }
@@ -110,7 +115,19 @@ const FinalUserNameScreen = ({ route }) => {
       <Text style={styles.recaptchaText}>
         PROTECTED BY RECAPTCHA
       </Text>
-
+        
+      {
+        loading ?
+        <View style={styles.activityIndicatorMainView}>
+          <View style={styles.activityIndicatorView}> 
+            <ActivityIndicator 
+              color="#1db954"
+              size={45}
+            />
+          </View>
+        </View> : null
+      
+      }
      
 
     </View>
@@ -216,6 +233,26 @@ const styles = StyleSheet.create({
     fontSize: 11,
     
     letterSpacing: 0.25
+  },
+  activityIndicatorMainView: {
+    flex: 1,
+    height: screenHeight,
+    width: screenWidth,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#14141490',
+    position: 'absolute',
+    top: 0,
+    zIndex: 10
+  },
+  activityIndicatorView: {
+    height: 150,
+    width: 300,
+    backgroundColor: '#fff',
+    elevation: 10,
+    borderRadius: 10,
+    justifyContent: 'center',
+    alignItems: 'center'
   }
 })
 

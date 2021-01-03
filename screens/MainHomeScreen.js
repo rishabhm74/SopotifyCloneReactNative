@@ -11,7 +11,8 @@ import {
   TouchableNativeFeedback,
   Dimensions,
   Alert,
-  TextInput
+  TextInput,
+  ActivityIndicator
 } from 'react-native';
 import { AuthContext } from '../AuthProvider';
 import database from '@react-native-firebase/database';
@@ -26,26 +27,38 @@ const screenHeight = Dimensions.get('window').height;
 
 const MainHomeScreen = () => {
   const { user, logout } = useContext(AuthContext);
-  const [ loggedUserName, setLoggedUserName ] = useState('');
+  // const [ loggedUserName, setLoggedUserName ] = useState('');
 
-  const readUserData = () => {
-    userDbReference.on('value', function(snapshot) {
-      let tempData = Object.values(snapshot.val());
-      let tempData1 = tempData.filter(data => data.email == user.email);
-      let tempData2 = tempData1[0]
-      setLoggedUserName(tempData2.userName)
-    })
-  }
+  // const readUserData = () => {
+  //   userDbReference.on('value', function(snapshot) {
+  //     let tempData = Object.values(snapshot.val());
+  //     let tempData1 = tempData.filter(data => data.email == user.email);
+  //     let tempData2 = tempData1[0]
+  //     setLoggedUserName(tempData2.userName)
+  //   })
+  // }
 
-  useEffect(() => {
-    readUserData();
-  }, [])
+  // useEffect(() => {
+  //   readUserData();
+  // }, [])
 
 
 
   return (
     <View style={styles.mainHomeScreenView}>
       <StatusBar barStyle="light-content" translucent={true} backgroundColor="#14141499" />
+
+      <Text>
+        ssdsd
+      </Text>
+      <Text>
+        ssdsd
+      </Text>
+
+      <Button
+        title="logout"
+        onPress={() => logout()}
+      />
 
     </View>
     

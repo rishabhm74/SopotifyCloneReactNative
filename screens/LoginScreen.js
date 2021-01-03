@@ -11,20 +11,27 @@ import {
   TouchableNativeFeedback,
   Dimensions,
   Alert,
-  TextInput
+  TextInput,
+  ActivityIndicator,
+  Keyboard
 } from 'react-native';
 
 import LoginHeader from '../components/LoginHeader';
 import { useNavigation } from '@react-navigation/native';
 import { AuthContext } from '../AuthProvider';
+import { cos } from 'react-native-reanimated';
 
 
 const screenWidth = Dimensions.get('window').width;
 const screenHeight = Dimensions.get('window').height;
 
 const LoginScreen = () => {
+
+  // const [loginEmail, setLoginEmail] = useState('rishabh@a.com');
   const [loginEmail, setLoginEmail] = useState('');
   const [loginPassword, setLoginPassword] = useState('');
+  // const [loginPassword, setLoginPassword] = useState('123456789');
+  const [ loading, setLoading ] = useState(false);
   const [nextState, setNextState] = useState(true)
 
   const { login } = useContext(AuthContext)
@@ -37,7 +44,16 @@ const LoginScreen = () => {
     if (loginEmail.length > 0) {
       if (reg.test(loginEmail) === true){
         // return navigation.navigate('LoginGreet');
-        return login(loginEmail, loginPassword);
+        try {
+          Keyboard.dismiss();
+          setLoading(!loading);
+          return login(loginEmail, loginPassword);
+        } catch(e) {
+          console.log("123")
+          // Keyboard.dismiss();
+          // setLoading(!loading);
+          // e.line == 24147 ? Alert.alert("Opps, looks like your email address or password is incorrect!") : null
+        }
       } 
     }
   }
@@ -115,7 +131,20 @@ const LoginScreen = () => {
           </Text>
         </View>
       </TouchableNativeFeedback>
+        
+
+      {
+        loading ?
+        <View style={styles.activityIndicatorMainView}>
+          <View style={styles.activityIndicatorView}> 
+            <ActivityIndicator 
+              color="#1db954"
+              size={45}
+            />
+          </View>
+        </View> : null
       
+      }
 
     </View>
   )
@@ -217,6 +246,26 @@ const styles = StyleSheet.create({
     fontFamily: 'Product Sans Bold 700',
     textTransform: 'uppercase',
     letterSpacing: 1.5
+  },
+  activityIndicatorMainView: {
+    flex: 1,
+    height: screenHeight,
+    width: screenWidth,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#14141490',
+    position: 'absolute',
+    top: 0,
+    zIndex: 10
+  },
+  activityIndicatorView: {
+    height: 150,
+    width: 300,
+    backgroundColor: '#fff',
+    elevation: 10,
+    borderRadius: 10,
+    justifyContent: 'center',
+    alignItems: 'center'
   }
 })
 
