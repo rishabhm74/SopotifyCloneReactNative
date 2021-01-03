@@ -18,15 +18,19 @@ import AuthStackHeader from '../components/AuthStackHeader';
 import { useNavigation } from '@react-navigation/native';
 import { AuthContext } from '../AuthProvider';
 
+import { db } from '../src/config';
 
 const screenWidth = Dimensions.get('window').width;
 const screenHeight = Dimensions.get('window').height;
 
 const FinalUserNameScreen = ({ route }) => {
-  const [userName, setUserName] = useState('');
+  const { userEmail, userPassword, userGender } = route.params;
+  const userNameFromEmail = userEmail.substring(0, userEmail.lastIndexOf("@"));
+
+  const [userName, setUserName] = useState(userNameFromEmail);
   const [nextState, setNextState] = useState(true)
 
-  const { userEmail, userPassword, userGender } = route.params;
+  
 
   const { register } = useContext(AuthContext)
 
@@ -36,6 +40,11 @@ const FinalUserNameScreen = ({ route }) => {
   const moveToGenderPage = () => {
     if (userName.length > 0) { 
       // return navigation.navigate('LoginGreet')
+      db.ref('/users').push({
+        userName: userNameFromEmail,
+        email: userEmail,
+        gender: userGender
+      });
       return register(userEmail, userPassword);
     }
   }
@@ -102,6 +111,7 @@ const FinalUserNameScreen = ({ route }) => {
         PROTECTED BY RECAPTCHA
       </Text>
 
+     
 
     </View>
   )

@@ -12,7 +12,7 @@ import {
 } from 'react-native';
 import { createStackNavigator } from '@react-navigation/stack';
 
-import HomeScreen from '../screens/HomeScreen';
+import MainHomeScreen from '../screens/MainHomeScreen';
 
 
 
@@ -25,8 +25,8 @@ const AppStack = ({navigation}) => {
       initialRouteName="LoginGreet"
     >
       <AppStackStack.Screen
-        name="HomeScreen"
-        component={HomeScreen}
+        name="MainHomeScreen"
+        component={MainHomeScreen}
         options={{header: () => null}}
       />
     </AppStackStack.Navigator>
