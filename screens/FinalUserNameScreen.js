@@ -13,44 +13,68 @@ import {
   Alert,
   TextInput,
   ActivityIndicator,
-  Keyboard
+  Keyboard,
+  Animated,
+  TouchableOpacity
 } from 'react-native';
 
 import AuthStackHeader from '../components/AuthStackHeader';
 import { useNavigation } from '@react-navigation/native';
 import { AuthContext } from '../AuthProvider';
+import AuthenticationActivityLoader from '../components/AuthenticationActivityLoader';
 
 import { db } from '../src/config';
 
 const screenWidth = Dimensions.get('window').width;
 const screenHeight = Dimensions.get('window').height;
 
-const FinalUserNameScreen = ({ route }) => {
+const FinalUserNameScreen = ({ route, navigation }) => {
   const { userEmail, userPassword, userGender } = route.params;
   const userNameFromEmail = userEmail.substring(0, userEmail.lastIndexOf("@"));
   const [ loading, setLoading ] = useState(false);
 
   const [userName, setUserName] = useState(userNameFromEmail);
-  const [nextState, setNextState] = useState(true)
+  const [nextState, setNextState] = useState(true);
+  const [ occuredError, setOccuredError ] = useState();
+  const [ emailUsedError, setEmailUsedError ] = useState(false);
 
   
 
   const { register } = useContext(AuthContext)
 
 
-  const navigation = useNavigation();
+  // const navigation = useNavigation();
+
+  const goToLogin = () => {
+    emailUsedError ? setEmailUsedError(false) : null;
+    return navigation.navigate('Login');
+  }
+
+  const closeModal = () => {
+    emailUsedError ? setEmailUsedError(false) : null;
+
+  }
 
   const moveToGenderPage = () => {
     if (userName.length > 0) { 
       // return navigation.navigate('LoginGreet')
+      
+      Keyboard.dismiss();
+      setLoading(!loading);
+      register(userEmail, userPassword)
+      .catch(error => {
+        setLoading(false);
+        if (error.code === 'auth/email-already-in-use') {
+          // setOccuredError('This email is already connected to an account.')
+          !emailUsedError ? setEmailUsedError(true) : null
+        }
+        return false
+      });
       db.ref('/users').push({
         userName: userNameFromEmail,
         email: userEmail,
         gender: userGender
       });
-      Keyboard.dismiss();
-      setLoading(!loading);
-      return register(userEmail, userPassword);
     }
   }
   
@@ -117,18 +141,47 @@ const FinalUserNameScreen = ({ route }) => {
       </Text>
         
       {
-        loading ?
-        <View style={styles.activityIndicatorMainView}>
-          <View style={styles.activityIndicatorView}> 
-            <ActivityIndicator 
-              color="#1db954"
-              size={45}
-            />
+        loading ? <AuthenticationActivityLoader />: null
+      }
+
+
+      {
+        emailUsedError ? 
+        <View style={styles.emailAlreadyInUseMainView}>
+          <View style={styles.emailAlreadyInUseView}>
+            <Text style={styles.emailConnectedText}>
+              This email is already connected to an account.
+            </Text>
+            <Text style={styles.wantToLoginInstedText}>
+              Do you want to log in instead?
+            </Text>
+            <TouchableNativeFeedback 
+              onPress={() => goToLogin()}
+            >
+              <View style={styles.goToLoginButtonView}>
+                <Text style={styles.goToLoginButtonViewText}>
+                  GO TO LOGIN
+                </Text>
+              </View>
+            </TouchableNativeFeedback>
+            <TouchableNativeFeedback
+              onPress={() => closeModal()}
+            >
+              <View  style={styles.closeTextView}>
+                <Text style={styles.closeText}>
+                  CLOSE
+                </Text>
+              </View>
+            </TouchableNativeFeedback>
           </View>
         </View> : null
-      
       }
-     
+
+      {/* { occuredError ?
+      <Text style={styles.errorText}>
+        {occuredError} here
+      </Text> : null
+      } */}
 
     </View>
   )
@@ -142,7 +195,7 @@ const styles = StyleSheet.create({
   }, 
   signUpScreen: {
     width: screenWidth,
-    height: screenHeight > 640 ? 180 : 160,
+    height: screenHeight > 640 ? 180 : 145,
     // backgroundColor: 'red',
     flexDirection: 'column',
     alignItems: 'flex-start',
@@ -234,7 +287,12 @@ const styles = StyleSheet.create({
     
     letterSpacing: 0.25
   },
-  activityIndicatorMainView: {
+  errorText: {
+    fontSize: 13.5,
+    color: '#fff',
+    fontFamily: 'Product-Sans-Regular',
+  },
+  emailAlreadyInUseMainView: {
     flex: 1,
     height: screenHeight,
     width: screenWidth,
@@ -243,16 +301,65 @@ const styles = StyleSheet.create({
     backgroundColor: '#14141490',
     position: 'absolute',
     top: 0,
-    zIndex: 10
+    zIndex: 15
   },
-  activityIndicatorView: {
-    height: 150,
-    width: 300,
+  emailAlreadyInUseView: {
+    width: screenHeight > 640 ? 350 : 305,
+    height: 310,
     backgroundColor: '#fff',
     elevation: 10,
-    borderRadius: 10,
+    borderRadius: screenHeight > 640 ? 10 : 8,
+    padding: 45,
+    paddingTop: 50
+  },
+  emailConnectedText: {
+    fontSize: 17,
+    color: '#000',
+    fontFamily: 'Product Sans Bold 700',
+    textAlign: 'center',
+  },
+  wantToLoginInstedText: {
+    fontSize: 13,
+    color: '#000',
+    fontFamily: 'Product-Sans-Regular',
+    textAlign: 'center',
+    marginTop: 25,
+    marginBottom: 42,
+  },
+  goToLoginButtonView: {
+    backgroundColor: '#1db954',
+    justifyContent: 'center',
+    alignItems: 'center',
+    width: 'auto',
+    marginLeft: 'auto',
+    marginRight: 'auto',
+    padding: 14.5,
+    paddingLeft: 50,
+    paddingRight: 50,
+    borderRadius: 100
+  },
+  goToLoginButtonViewText: {
+    color: '#fff',
+    fontSize: 14,
+    fontFamily: 'Product Sans Bold 700',
+    letterSpacing: 1.5,
+    borderRadius: 100,
+    textTransform: 'uppercase'
+  },
+  closeTextView: {
+    width: 'auto',
+    marginLeft: 'auto',
+    marginRight: 'auto',
+    // backgroundColor: 'red',
+    marginTop: 35,
     justifyContent: 'center',
     alignItems: 'center'
+  },  
+  closeText: {
+    color: '#000',
+    fontSize: 15,
+    fontFamily: 'Product Sans Bold 700',
+    letterSpacing: 1.5,
   }
 })
 

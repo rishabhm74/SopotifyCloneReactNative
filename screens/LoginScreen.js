@@ -19,6 +19,7 @@ import {
 import LoginHeader from '../components/LoginHeader';
 import { useNavigation } from '@react-navigation/native';
 import { AuthContext } from '../AuthProvider';
+import AuthenticationActivityLoader from '../components/AuthenticationActivityLoader';
 import { cos } from 'react-native-reanimated';
 
 
@@ -32,7 +33,9 @@ const LoginScreen = () => {
   const [loginPassword, setLoginPassword] = useState('');
   // const [loginPassword, setLoginPassword] = useState('123456789');
   const [ loading, setLoading ] = useState(false);
+  const [ occuredError, setOccuredError ] = useState('')
   const [nextState, setNextState] = useState(true)
+
 
   const { login } = useContext(AuthContext)
 
@@ -40,20 +43,38 @@ const LoginScreen = () => {
 
   const reg = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 
-  const moveToCreatePassword = () => {
+  const loginUser = () => {
     if (loginEmail.length > 0) {
       if (reg.test(loginEmail) === true){
-        // return navigation.navigate('LoginGreet');
-        try {
-          Keyboard.dismiss();
-          setLoading(!loading);
-          return login(loginEmail, loginPassword);
-        } catch(e) {
-          console.log("123")
-          // Keyboard.dismiss();
-          // setLoading(!loading);
-          // e.line == 24147 ? Alert.alert("Opps, looks like your email address or password is incorrect!") : null
-        }
+        Keyboard.dismiss();
+        setLoading(!loading);
+        login(loginEmail, loginPassword).catch(error => {
+          if (error.code === 'auth/user-disabled') {
+            setOccuredError('This email address has been disabled.')
+          }
+          if (error.code === 'auth/user-not-found') {
+            setOccuredError('This email and password combination is incorrect.')
+            setLoading(false);
+          }
+          if (error.code === 'auth/wrong-password') {
+            setOccuredError('This email and password combination is incorrect.')
+            setLoading(false);
+          }
+          return false
+        });
+        // let abc;
+        // async() => {
+        //   let bcd = await login(loginEmail, loginPassword)
+        //   console.log(bcd)
+        //   console.log("1211")
+        // };
+        // console.log(login(loginEmail, loginPassword))
+        // if(login(loginEmail, loginPassword)) {
+        //   console.log("hogya")
+        // } else {
+        //   console.log("nahi")
+        // }
+        // console.log(abc)
       } 
     }
   }
@@ -88,7 +109,12 @@ const LoginScreen = () => {
           // autoFocus={true}
           secureTextEntry={true}
         />
+
+        <Text style={styles.errorText}>
+          {occuredError}
+        </Text>
       </View>
+      
 
 
       <View>
@@ -96,7 +122,7 @@ const LoginScreen = () => {
           loginEmail.length > 0 && loginPassword.length >= 8 && reg.test(loginEmail) === true  ?
           <TouchableNativeFeedback
             disabled={false}
-            onPress={moveToCreatePassword}
+            onPress={loginUser}
           >
             <View 
               style={styles.emailNextButtonViewNotDisabled}
@@ -108,7 +134,7 @@ const LoginScreen = () => {
           </TouchableNativeFeedback> :
           <TouchableNativeFeedback
             disabled={true}
-            onPress={moveToCreatePassword}
+            onPress={loginUser}
           >
             <View 
               style={styles.emailNextButtonViewDisabled  }
@@ -134,17 +160,9 @@ const LoginScreen = () => {
         
 
       {
-        loading ?
-        <View style={styles.activityIndicatorMainView}>
-          <View style={styles.activityIndicatorView}> 
-            <ActivityIndicator 
-              color="#1db954"
-              size={45}
-            />
-          </View>
-        </View> : null
-      
+        loading ? <AuthenticationActivityLoader />: null
       }
+
 
     </View>
   )
@@ -162,7 +180,7 @@ const styles = StyleSheet.create({
   },
   signUpScreen: {
     width: screenWidth,
-    height: screenHeight > 640 ? 270 : 234,
+    height: screenHeight > 640 ? 285 : 249,
     // backgroundColor: 'red',
     flexDirection: 'column',
     alignItems: 'flex-start',
@@ -193,14 +211,16 @@ const styles = StyleSheet.create({
   },
   emailNextButtonViewNotDisabled: {
     backgroundColor: '#fff',
-    width: 150,
+    // width: 150,
     justifyContent: 'center',
     alignItems: 'center',
     height: screenHeight > 640 ? 47 : 43,
     borderRadius: 80,
     marginLeft: 'auto',
     marginRight: 'auto',
-    marginTop: 12,
+    // marginTop: 5,
+    paddingLeft: 48,
+    paddingRight: 48
   },
   emailNextButtonTextNotDisabled: {
     fontSize: 16,
@@ -213,14 +233,16 @@ const styles = StyleSheet.create({
     // backgroundColor: '#616060',
     backgroundColor: '#fff',
     opacity: 0.5,
-    width: 150,
+    // width: 150,
     justifyContent: 'center',
     alignItems: 'center',
     height: screenHeight > 640 ? 47 : 43,
     borderRadius: 80,
     marginLeft: 'auto',
     marginRight: 'auto',
-    marginTop: 12,
+    // marginTop: 5,
+    paddingLeft: 48,
+    paddingRight: 48
   },
   emailNextButtonTextDisabled: {
     fontSize: 16,
@@ -266,6 +288,11 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     justifyContent: 'center',
     alignItems: 'center'
+  },
+  errorText: {
+    fontSize: 13.5,
+    color: '#fff',
+    fontFamily: 'Product-Sans-Regular',
   }
 })
 

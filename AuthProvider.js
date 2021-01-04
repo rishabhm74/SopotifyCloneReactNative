@@ -29,24 +29,18 @@ export const AuthProvider = ({ children }) => {
       value={{
         user,
         setUser,
-        login: async (email, password) => {
-          try {
-            await auth().signInWithEmailAndPassword(email, password);
-          } catch(e) {
-            console.log(e)
-            Keyboard.dismiss();
-            e.line == 24147 ? Alert.alert("Opps, looks like your email address or password is incorrect!") : null;
-          }
-        },
-        register: async (email, password) => {
-          try {
-            await auth().createUserWithEmailAndPassword(email, password);
-          } catch(e) {
-            console.log(e);
-            Keyboard.dismiss();
-            e.line == 24147 ? Alert.alert("Opps, Email address already exists!") : null;
-          }
-        },
+        login: (email, password) => auth().signInWithEmailAndPassword(email, password)
+        .then(() => {
+          console.log("logged in")
+          return true
+        })
+        ,
+        register: (email, password) => auth().createUserWithEmailAndPassword(email, password).
+        then(() => {
+          console.log("user created")
+          return true
+        })
+        ,
         logout: async () => {
           try {
             await auth().signOut();
@@ -55,6 +49,44 @@ export const AuthProvider = ({ children }) => {
             // Alert.alert(e);
           }
         }
+        // login: async (email, password) => {
+        //   try {
+        //     await auth().signInWithEmailAndPassword(email, password);
+        //     console.log("success")
+        //     return true
+        //   } catch(e) {
+        //     console.log(e)
+        //     Keyboard.dismiss();
+        //     console.log("no success")
+        //     return false
+        //     // e.line == 24147 ? Alert.alert("Opps, looks like your email address or password is incorrect!") : null;
+        //     // return(console.log(e.line))
+        //   }
+          
+        // },
+        // .catch(error => {
+        //   if (error.code === 'auth/invalid-email') {
+        //     Alert.alert("Opps, looks like your email address is invalid");
+        //   }
+        //   if (error.code === 'auth/user-disabled') {
+        //     Alert.alert("Opps, looks like your email address has been disabled!");
+        //   }
+        //   if (error.code === 'auth/user-not-found') {
+        //     Alert.alert("Opps, looks like your email and password combination is incorrect!");
+        //   }
+        //   if (error.code === 'auth/wrong-password') {
+        //     Alert.alert("Opps, looks like your email and password combination is incorrect!");
+        //   }
+        //   return false
+        // })
+        
+        // register: async (email, password) => {
+        //   try {
+        //     await auth().createUserWithEmailAndPassword(email, password);
+        //   } catch(e) {
+        //     console.log(e);
+        //   }
+        // },
       }}
     >
       {children}
