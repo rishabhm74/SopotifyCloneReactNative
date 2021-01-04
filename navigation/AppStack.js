@@ -10,10 +10,11 @@ import {
   TouchableNativeFeedback,
   Button
 } from 'react-native';
-import { createStackNavigator } from '@react-navigation/stack';
+import { createStackNavigator, CardStyleInterpolators } from '@react-navigation/stack';
 
 import MainHomeScreen from '../screens/MainHomeScreen';
-
+import MusicLikeCategory from '../screens/MusicLikeCategory';
+import ArtistsSelectScreen from '../screens/ArtistsSelectScreen';
 
 
 const AppStackStack = createStackNavigator();
@@ -22,11 +23,24 @@ const AppStackStack = createStackNavigator();
 const AppStack = ({navigation}) => {
   return (
     <AppStackStack.Navigator 
-      initialRouteName="LoginGreet"
+      initialRouteName="MusicLikeCategory"
+      screenOptions={{
+        cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS
+      }}
     >
-      <AppStackStack.Screen
+      {/* <AppStackStack.Screen
         name="MainHomeScreen"
         component={MainHomeScreen}
+        options={{header: () => null}}
+      /> */}
+      <AppStackStack.Screen 
+        name="MusicLikeCategory"
+        component={MusicLikeCategory}
+        options={{header: () => null}}
+      />
+      <AppStackStack.Screen 
+        name="ArtistsSelectScreen"
+        component={ArtistsSelectScreen}
         options={{header: () => null}}
       />
     </AppStackStack.Navigator>
