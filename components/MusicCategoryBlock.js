@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useState, useRef, useImperativeHandle, forwardRef } from 'react';
 import {
   SafeAreaView,
   StyleSheet,
@@ -22,20 +22,31 @@ const screenWidth = Dimensions.get('window').width;
 const screenHeight = Dimensions.get('window').height;
 
 
-const MusicCategoryBlock = ( props ) => {
-  const [toggleCheckBox, setToggleCheckBox] = useState(false)
-  
-  
+const MusicCategoryBlock = ( props, ref ) => {
+  const [ clickState, setClickState ] = useState(true);
+
+  const tickStateHandler = () => {
+    clickState ? setClickState(false) : setClickState(true);
+  };
+
+  const clickMe = (theVar) => {
+    console.log(theVar)
+  }
+
 
 
   return (
     <TouchableNativeFeedback
       onPress={props.onPress}
+      // onPress={props.onPress, () => clickMe(props.musicCategory) }
+      // onPress={props.onPress.bind(this, props.musicCategory)}
+      // onPress={[...props, () => clickMe("car")]}
     >
       <LinearGradient
         colors={[ props.gradientLeftColor,  props.gradientRightColor]} 
         style={styles.blockElementGradient}
         start={{x: 0, y: 0}} end={{x: 1, y: 0}} 
+        
       >
         <View style={styles.blockInnerView}>
           <View  style={styles.blockInnerViewLeft}>
@@ -44,11 +55,9 @@ const MusicCategoryBlock = ( props ) => {
             </Text>
           </View>
           <View  style={styles.blockInnerViewRight}>
-            <CheckBox
-              disabled={false}
-              value={toggleCheckBox}
-              onValueChange={(newValue) => setToggleCheckBox(newValue)}
-            />
+            {
+              props.clickState ? <Text>Clixk</Text> : null
+            }
           </View>
         </View>
       </LinearGradient>
@@ -61,7 +70,7 @@ const styles = StyleSheet.create({
     height: screenHeight > 640 ? 78 : 75,
     width: '45.5%',
     backgroundColor: '#fff',
-    borderRadius: 8,
+    borderRadius: 10,
     margin: '2.25%',
     marginTop: 0,
     marginBottom: screenHeight > 640 ? 17 : 15,

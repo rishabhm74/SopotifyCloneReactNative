@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useState, useRef } from 'react';
 import {
   SafeAreaView,
   StyleSheet,
@@ -26,27 +26,45 @@ const screenHeight = Dimensions.get('window').height;
 
 
 const MusicLikeCategory = ({ navigation }) => {
-  let [ categoryList, setCategoryList ] = useState([]);
+  var [ categoryList, setCategoryList ] = useState([]);
+  const [ categoryListLength, setCategoryListLength ] = useState(false);
+
+
 
   const setCategoryListHandler = (category) => {
-    categoryList.indexOf(category) == -1 ? categoryList.push(category) : categoryList = categoryList.filter((item) =>  item !== category)
-    
-    
-    console.log(categoryList)
+    if ( categoryList.indexOf(category) == -1 ) { 
+      categoryList.push(category);
+      setCategoryList(categoryList);
+      categoryList.length > 0 ? setCategoryListLength(true) : null;
+      categoryList.length == 0 ? setCategoryListLength(false) : null;
+    } else {
+      categoryList = categoryList.filter((item) =>  item !== category);
+      setCategoryList(categoryList);
+      categoryList.length > 0 ? setCategoryListLength(true) : null;
+      categoryList.length == 0 ? setCategoryListLength(false) : null;
+    }
+
+    console.log(categoryList);
   }
 
-  const gradeintBlocks = MusicCategoryBlockGradients.map(
+
+
+  let gradeintBlocks = MusicCategoryBlockGradients.map(
       (block) => 
         <MusicCategoryBlock 
           gradientLeftColor = {block.gradientLeftColor}
           gradientRightColor = {block.gradientRightColor}
           musicCategory = {block.musicCategory}
           key = {block.key}
+          clickState= {false}
           onPress={() => setCategoryListHandler(block.key)}
-          // onPress={() => console.log(block.key)}
         /> 
       
     )
+  
+
+    
+
 
   const MoveToArtistsScreen = () => {
     return navigation.navigate('ArtistsSelectScreen');
@@ -67,27 +85,26 @@ const MusicLikeCategory = ({ navigation }) => {
       </View>
 
       <View style={styles.mainMusicLikeCategoryBlocksContainer}>
-        
         {gradeintBlocks}
-
-        
-
       </View>
 
 
-      <View 
-        style={styles.nextButtonContainer}
-      >
-        <TouchableNativeFeedback
-          onPress={() => MoveToArtistsScreen()}
+      {
+        categoryListLength  ?
+        <View 
+          style={styles.nextButtonContainer}
         >
-          <View style={styles.nextButtonContainerView}>
-            <Text  style={styles.nextButtonContainerViewText}>
-              NEXT
-            </Text>
-          </View>
-        </TouchableNativeFeedback>
-      </View>
+          <TouchableNativeFeedback
+            onPress={() => MoveToArtistsScreen()}
+          >
+            <View style={styles.nextButtonContainerView}>
+              <Text  style={styles.nextButtonContainerViewText}>
+                NEXT
+              </Text>
+            </View>
+          </TouchableNativeFeedback>
+        </View> : null
+      }
     </View>
   )
 }
@@ -105,7 +122,7 @@ const styles = StyleSheet.create({
     // backgroundColor: 'red',
     marginTop: StatusBar.currentHeight,
     padding: 20,
-    paddingTop: screenHeight > 640 ? 10 : 13,
+    paddingTop: screenHeight > 640 ? 11 : 13,
   },
   musicLikeCategoryTitleViewText: {
     color: '#fff',
@@ -120,7 +137,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     flexWrap: 'wrap',
-    paddingTop: screenHeight > 640 ? 0 : 2,
+    paddingTop: screenHeight > 640 ? 6 : 5,
     overflow: 'hidden'
   },
   nextButtonContainer: {
@@ -137,8 +154,8 @@ const styles = StyleSheet.create({
   nextButtonContainerView: {
     backgroundColor: '#fff',
     padding: 11.5,
-    paddingLeft: 45,
-    paddingRight: 45,
+    paddingLeft: 40,
+    paddingRight: 40,
     borderRadius: 100
   },
   nextButtonContainerViewText: {
