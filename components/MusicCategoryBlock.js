@@ -23,24 +23,20 @@ const screenHeight = Dimensions.get('window').height;
 
 
 const MusicCategoryBlock = ( props, ref ) => {
-  const [ clickState, setClickState ] = useState(true);
+  const [ clickState, setClickState ] = useState(false);
 
   const tickStateHandler = () => {
     clickState ? setClickState(false) : setClickState(true);
   };
 
-  const clickMe = (theVar) => {
-    console.log(theVar)
-  }
+ 
 
 
 
   return (
     <TouchableNativeFeedback
       onPress={props.onPress}
-      // onPress={props.onPress, () => clickMe(props.musicCategory) }
-      // onPress={props.onPress.bind(this, props.musicCategory)}
-      // onPress={[...props, () => clickMe("car")]}
+      onPressOut={() => tickStateHandler()}
     >
       <LinearGradient
         colors={[ props.gradientLeftColor,  props.gradientRightColor]} 
@@ -56,7 +52,10 @@ const MusicCategoryBlock = ( props, ref ) => {
           </View>
           <View  style={styles.blockInnerViewRight}>
             {
-              props.clickState ? <Text>Clixk</Text> : null
+              clickState ? 
+                <View style={styles.blockTick}>
+
+                </View> : null
             }
           </View>
         </View>
@@ -74,7 +73,7 @@ const styles = StyleSheet.create({
     margin: '2.25%',
     marginTop: 0,
     marginBottom: screenHeight > 640 ? 17 : 15,
-    padding: 10,
+    padding: 12,
     paddingTop: screenHeight > 640 ? 11 : 10
   },
   blockInnerView: {
@@ -90,15 +89,24 @@ const styles = StyleSheet.create({
   blockInnerViewRight: {
     height: '100%',
     width: '20%',
-    // backgroundColor: 'red'
+    // backgroundColor: 'red',
+    alignItems: 'flex-end',
+    padding: 5,
+    paddingTop: 2.5
   },
   blockInnerViewLeftText: {
     color: '#fff',
-    fontSize: 15,
+    fontSize: 17,
     fontFamily: 'Product Sans Bold 700',
     letterSpacing: 0.5
 
   },
+  blockTick: {
+    height: 20,
+    width: 20,
+    backgroundColor: '#fff',
+    borderRadius: 50
+  }
 })
 
 export default MusicCategoryBlock;
