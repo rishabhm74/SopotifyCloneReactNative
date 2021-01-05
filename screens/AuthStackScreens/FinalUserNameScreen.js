@@ -18,12 +18,12 @@ import {
   TouchableOpacity
 } from 'react-native';
 
-import AuthStackHeader from '../components/AuthStackHeader';
+import AuthStackHeader from '../../components/AuthStackHeader';
 import { useNavigation } from '@react-navigation/native';
-import { AuthContext } from '../AuthProvider';
-import AuthenticationActivityLoader from '../components/AuthenticationActivityLoader';
+import { AuthContext } from '../../AuthProvider';
+import AuthenticationActivityLoader from '../../components/AuthenticationActivityLoader';
 
-import { db } from '../src/config';
+import { db } from '../../src/config';
 
 const screenWidth = Dimensions.get('window').width;
 const screenHeight = Dimensions.get('window').height;
@@ -37,6 +37,7 @@ const FinalUserNameScreen = ({ route, navigation }) => {
   const [nextState, setNextState] = useState(true);
   const [ occuredError, setOccuredError ] = useState();
   const [ emailUsedError, setEmailUsedError ] = useState(false);
+  const [ somethingWentWrong, setSomethingWentWrong ] = useState(false);
 
   
 
@@ -55,6 +56,15 @@ const FinalUserNameScreen = ({ route, navigation }) => {
 
   }
 
+  const hideSomethingWentWrong = () => {
+    setSomethingWentWrong(false);
+  }
+
+  const tryAgainAccountCreation = () => {
+    setSomethingWentWrong(false);
+    moveToGenderPage();
+  }
+
   const moveToGenderPage = () => {
     if (userName.length > 0) { 
       // return navigation.navigate('LoginGreet')
@@ -62,19 +72,25 @@ const FinalUserNameScreen = ({ route, navigation }) => {
       Keyboard.dismiss();
       setLoading(!loading);
       register(userEmail, userPassword)
+      .then(() => {
+        db.ref('/users').push({
+          userName: userNameFromEmail,
+          email: userEmail,
+          gender: userGender
+        });
+      })
       .catch(error => {
         setLoading(false);
         if (error.code === 'auth/email-already-in-use') {
           // setOccuredError('This email is already connected to an account.')
-          !emailUsedError ? setEmailUsedError(true) : null
+          !emailUsedError ? setEmailUsedError(true) : null;
+          return;
+        } else {
+          somethingWentWrong == false ? setSomethingWentWrong(true) : null
         }
         return false
       });
-      db.ref('/users').push({
-        userName: userNameFromEmail,
-        email: userEmail,
-        gender: userGender
-      });
+      
     }
   }
   
@@ -177,11 +193,37 @@ const FinalUserNameScreen = ({ route, navigation }) => {
         </View> : null
       }
 
-      {/* { occuredError ?
-      <Text style={styles.errorText}>
-        {occuredError} here
-      </Text> : null
-      } */}
+
+      { 
+        somethingWentWrong ?
+        <View style={styles.pleaseTryLaterMainView}>
+          <View style={styles.pleaseTryLaterMainViewTextView}>
+            <Text style={styles.pleaseTryLaterMainViewText}>
+              Something went wrong.
+            </Text>
+            <View style={styles.tryAgainLaterButtonContainerView}>
+              <TouchableNativeFeedback
+                onPress={() => hideSomethingWentWrong()}
+              >
+                <View  style={styles.pleaseTryLaterCancelTextView}>
+                  <Text style={styles.pleaseTryLaterCancelText}>
+                    Cancel
+                  </Text>
+                </View>
+              </TouchableNativeFeedback>
+              <TouchableNativeFeedback
+                onPress={() => tryAgainAccountCreation()}
+              >
+                <View  style={styles.pleaseTryLaterTryAgainTextView}>
+                  <Text style={styles.pleaseTryLaterTryAgainText}>
+                    Try again
+                  </Text>
+                </View>
+              </TouchableNativeFeedback>
+            </View>
+          </View>
+        </View> : null
+      }
 
     </View>
   )
@@ -360,6 +402,67 @@ const styles = StyleSheet.create({
     fontSize: 15,
     fontFamily: 'Product Sans Bold 700',
     letterSpacing: 1.5,
+  },
+  pleaseTryLaterMainView: {
+    flex: 1,
+    width: screenWidth,
+    height: screenHeight,
+    backgroundColor: '#14141490',
+    zIndex: 30,
+    position: 'absolute',
+    top: 0,
+    justifyContent: 'center',
+    alignItems: 'center'
+  },
+  pleaseTryLaterMainViewTextView: {
+    width: screenHeight > 640 ? 350 : 305,
+    height: 170,
+    backgroundColor: '#fff',
+    elevation: 10,
+    borderRadius: screenHeight > 640 ? 10 : 8,
+    padding: 30,
+    paddingLeft: 30,
+    paddingRight: 30,
+    paddingBottom: 35,
+    flexDirection: 'column',
+    justifyContent: 'space-between'
+  },
+  pleaseTryLaterMainViewText: {
+    color: '#141414',
+    fontSize: 17,
+    fontFamily: 'Product Sans Bold 700',
+
+  },
+  tryAgainLaterButtonContainerView: {
+    width: '100%',
+    height: 'auto',
+    // backgroundColor: 'red',
+    justifyContent: 'space-between',
+    flexDirection: 'row',
+  },
+  pleaseTryLaterTryAgainTextView: {
+    backgroundColor: '#1db954',
+    padding: 12,
+    paddingLeft: 35,
+    paddingRight: 35,
+    borderRadius: 100
+  },
+  pleaseTryLaterTryAgainText: {
+    color: '#fff',
+    fontSize: 17,
+    fontFamily: 'Product Sans Bold 700',
+  },
+  pleaseTryLaterCancelText: {
+    color: '#999',
+    fontSize: 17,
+    fontFamily: 'Product-Sans-Regular',
+  },
+  pleaseTryLaterCancelTextView: {
+    backgroundColor: '#fff',
+    padding: 12,
+    paddingLeft: 5,
+    paddingRight: 5,
+    borderRadius: 100
   }
 })
 

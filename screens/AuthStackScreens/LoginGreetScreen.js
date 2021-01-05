@@ -31,13 +31,13 @@ const LoginGreetScreen = ({navigation}) => {
         />
       <View style={styles.loginGreetImgContainer} >
         <Image 
-          source={require('../assets/images/accountGreetScreen.png')} 
+          source={require('../../assets/images/accountGreetScreen.png')} 
           style={styles.loginGreetImgContainerImg}
         />
       </View>
       <View style={styles.loginGreetScreenViewTagLineContainer}>
         <Image 
-          source={require('../assets/icons/mainIcon.png')} 
+          source={require('../../assets/icons/mainIcon.png')} 
           style={styles.loginGreetImgContainerMainIcon}
         />
         <Text style={styles.tagLineText}>
@@ -52,11 +52,11 @@ const LoginGreetScreen = ({navigation}) => {
             </Text>
           </View>
         </TouchableNativeFeedback>
-        <TouchableNativeFeedback>
+        <TouchableNativeFeedback onPress={() => navigation.navigate('PhoneAuth')}>
           <View style={styles.signUpButtons}>
             <View style={styles.signUpButtonsIconLogoContainer}>
               <Image 
-                source={require('../assets/icons/phone.png')}
+                source={require('../../assets/icons/phone.png')}
                 style={styles.signUpButtonsLogo}
               />
             </View>
@@ -71,7 +71,7 @@ const LoginGreetScreen = ({navigation}) => {
           <View style={styles.signUpButtons}>
             <View style={styles.signUpButtonsIconLogoContainer}>
               <Image 
-                source={require('../assets/icons/google.png')}
+                source={require('../../assets/icons/google.png')}
                 style={styles.signUpButtonsLogo}
               />
             </View>
@@ -86,7 +86,7 @@ const LoginGreetScreen = ({navigation}) => {
           <View style={styles.signUpButtons}>
             <View style={styles.signUpButtonsIconLogoContainer}>
               <Image 
-                source={require('../assets/icons/facebook.png')}
+                source={require('../../assets/icons/facebook.png')}
                 style={styles.signUpButtonsLogo}
               />
             </View>

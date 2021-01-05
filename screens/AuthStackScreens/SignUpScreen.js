@@ -14,7 +14,7 @@ import {
   TextInput
 } from 'react-native';
 
-import AuthStackHeader from '../components/AuthStackHeader';
+import AuthStackHeader from '../../components/AuthStackHeader';
 
 
 const screenWidth = Dimensions.get('window').width;

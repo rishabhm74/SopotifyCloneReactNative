@@ -15,7 +15,7 @@ import {
 } from 'react-native';
 import DatePicker from 'react-native-date-picker';
 
-import AuthStackHeader from '../components/AuthStackHeader';
+import AuthStackHeader from '../../components/AuthStackHeader';
 import { useNavigation } from '@react-navigation/native';
 
 

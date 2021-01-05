@@ -12,14 +12,15 @@ import {
 } from 'react-native';
 import { createStackNavigator, CardStyleInterpolators } from '@react-navigation/stack';
 
-import LoginGreetScreen from '../screens/LoginGreetScreen';
+import LoginGreetScreen from '../screens/AuthStackScreens/LoginGreetScreen';
 // import SignUpWithEmailStack from './SignUpWithEmailStack';
-import SignUpEmailScreen from '../screens/SignUpEmailScreen';
-import CreatePasswordScreen from '../screens/CreatePasswordScreen';
-import DateOfBirthScreen from '../screens/DateOfBirthScreen';
-import UserGenderScreen from '../screens/UserGenderScreen';
-import FinalUserNameScreen from '../screens/FinalUserNameScreen';
-import LoginScreen from '../screens/LoginScreen';
+import SignUpEmailScreen from '../screens/AuthStackScreens/SignUpEmailScreen';
+import CreatePasswordScreen from '../screens/AuthStackScreens/CreatePasswordScreen';
+// import DateOfBirthScreen from '../screens/DateOfBirthScreen';
+import UserGenderScreen from '../screens/AuthStackScreens/UserGenderScreen';
+import FinalUserNameScreen from '../screens/AuthStackScreens/FinalUserNameScreen';
+import LoginScreen from '../screens/AuthStackScreens/LoginScreen';
+import PhoneAuthScreen from '../screens/AuthStackScreens/PhoneAuthScreen';
 
 
 
@@ -78,6 +79,13 @@ const AuthStack = ({navigation}) => {
       <AuthStackStack.Screen
         name="Login"
         component={LoginScreen}
+        options={{ 
+          header: () => null
+        }}
+      />
+      <AuthStackStack.Screen
+        name="PhoneAuth"
+        component={PhoneAuthScreen}
         options={{ 
           header: () => null
         }}

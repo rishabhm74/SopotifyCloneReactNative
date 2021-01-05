@@ -16,7 +16,8 @@ import {
   Keyboard
 } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
-
+import MusicCategoryBlock from '../components/MusicCategoryBlock';
+import MusicCategoryBlockGradients from '../components/MusicCategoryBlockGradients';
 
 
 
@@ -25,6 +26,27 @@ const screenHeight = Dimensions.get('window').height;
 
 
 const MusicLikeCategory = ({ navigation }) => {
+  let [ categoryList, setCategoryList ] = useState([]);
+
+  const setCategoryListHandler = (category) => {
+    categoryList.indexOf(category) == -1 ? categoryList.push(category) : categoryList = categoryList.filter((item) =>  item !== category)
+    
+    
+    console.log(categoryList)
+  }
+
+  const gradeintBlocks = MusicCategoryBlockGradients.map(
+      (block) => 
+        <MusicCategoryBlock 
+          gradientLeftColor = {block.gradientLeftColor}
+          gradientRightColor = {block.gradientRightColor}
+          musicCategory = {block.musicCategory}
+          key = {block.key}
+          onPress={() => setCategoryListHandler(block.key)}
+          // onPress={() => console.log(block.key)}
+        /> 
+      
+    )
 
   const MoveToArtistsScreen = () => {
     return navigation.navigate('ArtistsSelectScreen');
@@ -46,199 +68,9 @@ const MusicLikeCategory = ({ navigation }) => {
 
       <View style={styles.mainMusicLikeCategoryBlocksContainer}>
         
-        <TouchableNativeFeedback
-          onPress={() => console.log("click")}
-        >
-          <LinearGradient
-            colors={['#c52222',  '#e62424']} 
-            style={styles.blockElementGradient}
-            start={{x: 0, y: 0}} end={{x: 1, y: 0}} 
-          >
-            <View style={styles.blockInnerView}>
-              <View  style={styles.blockInnerViewLeft}>
-                <Text style={styles.blockInnerViewLeftText}>
-                  Hindi
-                </Text>
-              </View>
-              <View  style={styles.blockInnerViewRight}>
-
-              </View>
-            </View>
-          </LinearGradient>
-        </TouchableNativeFeedback>
-
-
-        <TouchableNativeFeedback>
-          <LinearGradient
-            colors={['#b67724',  '#E89425']} 
-            style={styles.blockElementGradient}
-            start={{x: 0, y: 0}} end={{x: 1, y: 0}} 
-          >
-            <View style={styles.blockInnerView}>
-              <View  style={styles.blockInnerViewLeft}>
-                <Text style={styles.blockInnerViewLeftText}>
-                  English
-                </Text>
-              </View>
-              <View  style={styles.blockInnerViewRight}>
-
-              </View>
-            </View>
-          </LinearGradient>
-        </TouchableNativeFeedback>
-
-        <TouchableNativeFeedback>
-          <LinearGradient
-            colors={['#92207E',  '#AA2590']} 
-            style={styles.blockElementGradient}
-            start={{x: 0, y: 0}} end={{x: 1, y: 0}} 
-          >
-            <View style={styles.blockInnerView}>
-              <View  style={styles.blockInnerViewLeft}>
-                <Text style={styles.blockInnerViewLeftText}>
-                  Punjabi
-                </Text>
-              </View>
-              <View  style={styles.blockInnerViewRight}>
-
-              </View>
-            </View>
-          </LinearGradient>
-        </TouchableNativeFeedback>
-
-        <TouchableNativeFeedback>
-          <LinearGradient
-            colors={['#b89047',  '#D8A850']} 
-            style={styles.blockElementGradient}
-            start={{x: 0, y: 0}} end={{x: 1, y: 0}} 
-          >
-            <View style={styles.blockInnerView}>
-              <View  style={styles.blockInnerViewLeft}>
-                <Text style={styles.blockInnerViewLeftText}>
-                  Tamil
-                </Text>
-              </View>
-              <View  style={styles.blockInnerViewRight}>
-
-              </View>
-            </View>
-          </LinearGradient>
-        </TouchableNativeFeedback>
-
-        <TouchableNativeFeedback>
-          <LinearGradient
-            colors={['#13a161',  '#16C277']} 
-            style={styles.blockElementGradient}
-            start={{x: 0, y: 0}} end={{x: 1, y: 0}} 
-          >
-            <View style={styles.blockInnerView}>
-              <View  style={styles.blockInnerViewLeft}>
-                <Text style={styles.blockInnerViewLeftText}>
-                  Telugu
-                </Text>
-              </View>
-              <View  style={styles.blockInnerViewRight}>
-
-              </View>
-            </View>
-          </LinearGradient>
-        </TouchableNativeFeedback>
-
-        <TouchableNativeFeedback>
-          <LinearGradient
-            colors={['#78917b',  '#A5CBAA']} 
-            style={styles.blockElementGradient}
-            start={{x: 0, y: 0}} end={{x: 1, y: 0}} 
-          >
-            <View style={styles.blockInnerView}>
-              <View  style={styles.blockInnerViewLeft}>
-                <Text style={styles.blockInnerViewLeftText}>
-                  Malyalam
-                </Text>
-              </View>
-              <View  style={styles.blockInnerViewRight}>
-
-              </View>
-            </View>
-          </LinearGradient>
-        </TouchableNativeFeedback>
-
-        <TouchableNativeFeedback>
-          <LinearGradient
-            colors={['#965c3f',  '#B8744E']} 
-            style={styles.blockElementGradient}
-            start={{x: 0, y: 0}} end={{x: 1, y: 0}} 
-          >
-            <View style={styles.blockInnerView}>
-              <View  style={styles.blockInnerViewLeft}>
-                <Text style={styles.blockInnerViewLeftText}>
-                  Marathi
-                </Text>
-              </View>
-              <View  style={styles.blockInnerViewRight}>
-
-              </View>
-            </View>
-          </LinearGradient>
-        </TouchableNativeFeedback>
-
-        <TouchableNativeFeedback>
-          <LinearGradient
-            colors={['#aa4f70',  '#D2648A']} 
-            style={styles.blockElementGradient}
-            start={{x: 0, y: 0}} end={{x: 1, y: 0}} 
-          >
-            <View style={styles.blockInnerView}>
-              <View  style={styles.blockInnerViewLeft}>
-                <Text style={styles.blockInnerViewLeftText}>
-                  Gujarati
-                </Text>
-              </View>
-              <View  style={styles.blockInnerViewRight}>
-
-              </View>
-            </View>
-          </LinearGradient>
-        </TouchableNativeFeedback>
+        {gradeintBlocks}
 
         
-        <TouchableNativeFeedback>
-          <LinearGradient
-            colors={['#396eaf',  '#4382CE']} 
-            style={styles.blockElementGradient}
-            start={{x: 0, y: 0}} end={{x: 1, y: 0}} 
-          >
-            <View style={styles.blockInnerView}>
-              <View  style={styles.blockInnerViewLeft}>
-                <Text style={styles.blockInnerViewLeftText}>
-                  Bengali
-                </Text>
-              </View>
-              <View  style={styles.blockInnerViewRight}>
-
-              </View>
-            </View>
-          </LinearGradient>
-        </TouchableNativeFeedback>
-
-        <TouchableNativeFeedback>
-          <LinearGradient
-            colors={['#b41c29',  '#da1c2f']} 
-            style={styles.blockElementGradient}
-            start={{x: 0, y: 0}} end={{x: 1, y: 0}} 
-          >
-            <View style={styles.blockInnerView}>
-              <View  style={styles.blockInnerViewLeft}>
-                <Text style={styles.blockInnerViewLeftText}>
-                  Kannada
-                </Text>
-              </View>
-              <View  style={styles.blockInnerViewRight}>
-
-              </View>
-            </View>
-          </LinearGradient>
-        </TouchableNativeFeedback>
 
       </View>
 
@@ -268,12 +100,12 @@ const styles = StyleSheet.create({
     backgroundColor: '#141414'
   },
   musicLikeCategoryTitleView: {
-    height: 65,
+    height: screenHeight > 640 ? 68 : 55,
     width: '100%',
     // backgroundColor: 'red',
     marginTop: StatusBar.currentHeight,
     padding: 20,
-    paddingTop: 17,
+    paddingTop: screenHeight > 640 ? 10 : 13,
   },
   musicLikeCategoryTitleViewText: {
     color: '#fff',
@@ -288,41 +120,8 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     flexWrap: 'wrap',
-    paddingTop: 7,
+    paddingTop: screenHeight > 640 ? 0 : 2,
     overflow: 'hidden'
-  },
-  blockElementGradient: {
-    height: 80,
-    width: '45.5%',
-    backgroundColor: '#fff',
-    borderRadius: 8,
-    margin: '2.25%',
-    marginTop: 0,
-    marginBottom: 17,
-    padding: 10,
-    paddingTop: 11
-  },
-  blockInnerView: {
-    width: '100%',
-    height: '100%',
-    flexDirection: 'row'
-  },
-  blockInnerViewLeft: {
-    height: '100%',
-    width: '80%',
-    // backgroundColor: 'red'
-  },
-  blockInnerViewRight: {
-    height: '100%',
-    width: '20%',
-    // backgroundColor: 'red'
-  },
-  blockInnerViewLeftText: {
-    color: '#fff',
-    fontSize: 15,
-    fontFamily: 'Product Sans Bold 700',
-    letterSpacing: 0.5
-
   },
   nextButtonContainer: {
     position: 'absolute',

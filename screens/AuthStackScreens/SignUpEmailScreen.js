@@ -14,28 +14,28 @@ import {
   TextInput
 } from 'react-native';
 
-import AuthStackHeader from '../components/AuthStackHeader';
+import AuthStackHeader from '../../components/AuthStackHeader';
 import { useNavigation } from '@react-navigation/native';
 
 
 const screenWidth = Dimensions.get('window').width;
 const screenHeight = Dimensions.get('window').height;
 
-const CreatePasswordScreen = ({ route }) => {
-  const [password, setPassword] = useState('');
+const SignUpEmailScreen = () => {
+  const [email, setEmail] = useState('');
   const [nextState, setNextState] = useState(true)
 
-
-
   const navigation = useNavigation();
-  const { userEmail } = route.params;
 
-  const moveToGenderPage = () => {
-    if (password.length >= 8) {
-      return navigation.navigate('UserGender', {
-        userEmail: userEmail,
-        userPassword: password
-      })
+  const reg = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+
+  const moveToCreatePassword = () => {
+    if (email.length > 0) {
+      if (reg.test(email) === true){
+        return navigation.navigate('CreatePassword', {
+          userEmail: email
+        });
+      } 
     }
   }
   
@@ -44,29 +44,29 @@ const CreatePasswordScreen = ({ route }) => {
       <AuthStackHeader />
       <View style={styles.signUpScreen}>
         <Text style={styles.whatsYourEmailText}>
-          Create a password
+          What's your email?
         </Text>
         <TextInput 
-          onChangeText={(password) => setPassword(password)}
+          onChangeText={(userEmail) => setEmail(userEmail)}
           style={styles.emailInputBar}
+          keyboardType='email-address'
           autoCapitalize="none"
           autoCorrect={false}
-          secureTextEntry={true}
-          value={password}
+          value={email}
           autoFocus={true}
         />
         <Text style={styles.confirmEmailText}>
-          Use at least 8 characters.
+          You'll need to confirm this email later.
         </Text>
       </View>
 
 
       <View>
         {
-          password.length >= 8 ?
+          email.length > 0 && reg.test(email) === true ?
           <TouchableNativeFeedback
             disabled={false}
-            onPress={moveToGenderPage}
+            onPress={moveToCreatePassword}
           >
             <View 
               style={styles.emailNextButtonViewNotDisabled}
@@ -78,7 +78,7 @@ const CreatePasswordScreen = ({ route }) => {
           </TouchableNativeFeedback> :
           <TouchableNativeFeedback
             disabled={true}
-            onPress={moveToGenderPage}
+            onPress={moveToCreatePassword}
           >
             <View 
               style={styles.emailNextButtonViewDisabled  }
@@ -88,9 +88,13 @@ const CreatePasswordScreen = ({ route }) => {
               </Text>
             </View>
           </TouchableNativeFeedback>
+
+
+
         }
       </View>
       
+
     </View>
   )
 }
@@ -103,7 +107,7 @@ const styles = StyleSheet.create({
   }, 
   signUpScreen: {
     width: screenWidth,
-    height: screenHeight > 640 ? 185 : 160,
+    height: screenHeight > 640 ? 190 : 170,
     // backgroundColor: 'red',
     flexDirection: 'column',
     alignItems: 'flex-start',
@@ -113,7 +117,7 @@ const styles = StyleSheet.create({
   whatsYourEmailText: {
     color: '#fff',
     fontFamily: 'Product Sans Bold 700',
-    fontSize: 23,
+    fontSize: 30,
     marginBottom: screenHeight > 640 ? 12 : 10
   },
   emailInputBar: {
@@ -171,4 +175,4 @@ const styles = StyleSheet.create({
 })
 
 
-export default CreatePasswordScreen;
+export default SignUpEmailScreen;

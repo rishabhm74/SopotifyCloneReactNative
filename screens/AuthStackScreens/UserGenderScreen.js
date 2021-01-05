@@ -15,7 +15,7 @@ import {
   TouchableOpacity
 } from 'react-native';
 
-import AuthStackHeader from '../components/AuthStackHeader';
+import AuthStackHeader from '../../components/AuthStackHeader';
 import { useNavigation } from '@react-navigation/native';
 
 
