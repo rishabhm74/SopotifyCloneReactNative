@@ -231,7 +231,7 @@ const styles = StyleSheet.create({
     marginBottom: screenHeight > 640 ? 2 : 2
   },
   emailInputBar: {
-    backgroundColor: '#616060',
+    backgroundColor: '#424242',
     width: '100%',
     borderRadius: 5,
     padding: 10,
@@ -344,7 +344,7 @@ const styles = StyleSheet.create({
   },
   pleaseTryLaterMainViewTextView: {
     width: screenHeight > 640 ? 350 : 305,
-    height: 170,
+    height: 180,
     backgroundColor: '#fff',
     elevation: 10,
     borderRadius: screenHeight > 640 ? 10 : 8,
@@ -388,8 +388,8 @@ const styles = StyleSheet.create({
   pleaseTryLaterCancelTextView: {
     backgroundColor: '#fff',
     padding: 12,
-    paddingLeft: 5,
-    paddingRight: 5,
+    // paddingLeft: 5,
+    // paddingRight: 5,
     borderRadius: 100
   }
 })

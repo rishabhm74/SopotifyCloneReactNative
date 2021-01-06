@@ -117,7 +117,7 @@ const styles = StyleSheet.create({
     marginBottom: screenHeight > 640 ? 12 : 10
   },
   emailInputBar: {
-    backgroundColor: '#616060',
+    backgroundColor: '#424242',
     width: '100%',
     borderRadius: 5,
     padding: 10,

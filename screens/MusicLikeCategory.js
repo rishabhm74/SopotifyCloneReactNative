@@ -90,7 +90,7 @@ const MusicLikeCategory = ({ navigation }) => {
 
 
       {
-        categoryListLength  ?
+        categoryListLength  ? // changed
         <View 
           style={styles.nextButtonContainer}
         >
@@ -137,7 +137,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     flexWrap: 'wrap',
-    paddingTop: screenHeight > 640 ? 6 : 12,
+    paddingTop: screenHeight > 640 ? 6 : 13,
     overflow: 'hidden'
   },
   nextButtonContainer: {
@@ -156,7 +156,7 @@ const styles = StyleSheet.create({
     padding: 11.5,
     paddingLeft: 40,
     paddingRight: 40,
-    borderRadius: 100
+    borderRadius: 100,
   },
   nextButtonContainerViewText: {
     fontSize:16,

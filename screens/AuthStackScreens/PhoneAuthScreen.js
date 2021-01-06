@@ -77,7 +77,7 @@ const styles = StyleSheet.create({
   },
   phoneNumberEnterScreen: {
     width: '100%',
-    backgroundColor: '#555',
+    backgroundColor: '#424242',
     borderRadius: 5,
     height: screenHeight > 640 ? 100 : 90,
     marginBottom: 12,

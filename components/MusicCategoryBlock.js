@@ -69,7 +69,7 @@ const MusicCategoryBlock = ( props, ref ) => {
 
 const styles = StyleSheet.create({
   blockElementGradient: {
-    height: screenHeight > 640 ? 78 : 75,
+    height: screenHeight > 640 ? 78 : 73,
     width: '45.5%',
     backgroundColor: '#fff',
     borderRadius: screenHeight > 640 ? 10 : 8,
@@ -77,7 +77,7 @@ const styles = StyleSheet.create({
     marginTop: 0,
     marginBottom: screenHeight > 640 ? 17 : 15,
     padding: 12,
-    paddingTop: screenHeight > 640 ? 11 : 10,
+    paddingTop: screenHeight > 640 ? 11 : 9,
     paddingRight: screenHeight > 640 ? 10 : 7
   },
   blockInnerView: {
@@ -100,7 +100,7 @@ const styles = StyleSheet.create({
   },
   blockInnerViewLeftText: {
     color: '#fff',
-    fontSize: 17,
+    fontSize: 16.5,
     fontFamily: 'Product Sans Bold 700',
     letterSpacing: 0.5
 
