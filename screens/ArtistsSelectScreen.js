@@ -17,7 +17,8 @@ import {
 } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
 
-
+import ArtistsData from '../components/ArtistsData';
+import ArtistBlock from '../components/ArtistBlock';
 
 
 const screenWidth = Dimensions.get('window').width;
@@ -26,6 +27,39 @@ const screenHeight = Dimensions.get('window').height;
 
 const ArtistsSelectScreen = () => {
   const [ artistName, setArtistName ] = useState('');
+  var [ artistList, setArtistList ] = useState([]);
+  const [ artistListLength, setArtistListLength] = useState(false);
+
+
+  const setArtistListHandler = (theVar) => {
+    if ( artistList.indexOf(theVar) == -1 ) { 
+      artistList.push(theVar);
+      setArtistList(artistList);
+      artistList.length > 0 ? setArtistListLength(true) : null;
+      artistList.length == 0 ? setArtistListLength(false) : null;
+    } else {
+      artistList = artistList.filter((item) =>  item !== theVar);
+      setArtistList(artistList);
+      artistList.length > 0 ? setArtistListLength(true) : null;
+      artistList.length == 0 ? setArtistListLength(false) : null;
+    }
+
+
+    console.log(artistList);
+
+  }
+
+  const artistsBlockArray = ArtistsData.map((artist) => 
+    <ArtistBlock 
+      onPress={() => setArtistListHandler(artist.name)}
+      imageUrl = {artist.imageUrl}
+      artistName = {artist.name}
+      key={artist.name}
+    />
+  )
+
+
+
 
   return (
     <View style={styles.mainArtistsSelectScreenView}>
@@ -57,7 +91,7 @@ const ArtistsSelectScreen = () => {
               autoCapitalize="none"
               autoCorrect={false}
               autoFocus={false}
-              onChangeText={(artist) => setArtistName(artist) }
+              onChangeText={(artistText) => setArtistName(artistText) }
               placeholderTextColor="#ffffff50"
             />
           </View>
@@ -71,272 +105,8 @@ const ArtistsSelectScreen = () => {
       >
         <View style={styles.artistsScrollViewInnerView}>
 
-          <View style={styles.artistBlock}>
-            <View style={styles.artistImageContainer}>
-              <View style={styles.artistImgContainer}>
+          {artistsBlockArray}
 
-              </View>
-              <View style={styles.blockTick}>
-                <Image 
-                  source={require('../assets/icons/check2.png')}
-                  style={styles.checkImg}
-                />
-              </View> 
-            </View>
-            <View style={styles.artistNameContainer}>
-              <Text style={styles.artistNameText}>
-                Abhay Jodhpurkar
-              </Text>
-            </View>
-          </View>
-
-          <View style={styles.artistBlock}>
-            <View style={styles.artistImageContainer}>
-              <View style={styles.artistImgContainer}>
-
-              </View>
-              <View style={styles.blockTick}>
-                <Image 
-                  source={require('../assets/icons/check2.png')}
-                  style={styles.checkImg}
-                />
-              </View> 
-            </View>
-            <View style={styles.artistNameContainer}>
-              <Text style={styles.artistNameText}>
-                k. j. yesudas
-              </Text>
-            </View>
-          </View>
-
-          <View style={styles.artistBlock}>
-            <View style={styles.artistImageContainer}>
-              <View style={styles.artistImgContainer}>
-
-              </View>
-              {/* <View style={styles.blockTick}>
-                <Image 
-                  source={require('../assets/icons/check2.png')}
-                  style={styles.checkImg}
-                />
-              </View>  */}
-            </View>
-            <View style={styles.artistNameContainer}>
-              <Text style={styles.artistNameText}>
-                Shreya ghosal
-              </Text>
-            </View>
-          </View>
-
-          <View style={styles.artistBlock}>
-            <View style={styles.artistImageContainer}>
-              <View style={styles.artistImgContainer}>
-
-              </View>
-              {/* <View style={styles.blockTick}>
-                <Image 
-                  source={require('../assets/icons/check2.png')}
-                  style={styles.checkImg}
-                />
-              </View>  */}
-            </View>
-            <View style={styles.artistNameContainer}>
-              <Text style={styles.artistNameText}>
-                unni menon
-              </Text>
-            </View>
-          </View>
-
-          <View style={styles.artistBlock}>
-            <View style={styles.artistImageContainer}>
-              <View style={styles.artistImgContainer}>
-
-              </View>
-              <View style={styles.blockTick}>
-                <Image 
-                  source={require('../assets/icons/check2.png')}
-                  style={styles.checkImg}
-                />
-              </View> 
-            </View>
-            <View style={styles.artistNameContainer}>
-              <Text style={styles.artistNameText}>
-                tippu
-              </Text>
-            </View>
-          </View>
-
-          <View style={styles.artistBlock}>
-            <View style={styles.artistImageContainer}>
-              <View style={styles.artistImgContainer}>
-
-              </View>
-              {/* <View style={styles.blockTick}>
-                <Image 
-                  source={require('../assets/icons/check2.png')}
-                  style={styles.checkImg}
-                />
-              </View>  */}
-            </View>
-            <View style={styles.artistNameContainer}>
-              <Text style={styles.artistNameText}>
-                Shreya ghosal
-              </Text>
-            </View>
-          </View>
-
-          <View style={styles.artistBlock}>
-            <View style={styles.artistImageContainer}>
-              <View style={styles.artistImgContainer}>
-
-              </View>
-              {/* <View style={styles.blockTick}>
-                <Image 
-                  source={require('../assets/icons/check2.png')}
-                  style={styles.checkImg}
-                />
-              </View>  */}
-            </View>
-            <View style={styles.artistNameContainer}>
-              <Text style={styles.artistNameText}>
-                unni menon
-              </Text>
-            </View>
-          </View>
-
-          <View style={styles.artistBlock}>
-            <View style={styles.artistImageContainer}>
-              <View style={styles.artistImgContainer}>
-
-              </View>
-              <View style={styles.blockTick}>
-                <Image 
-                  source={require('../assets/icons/check2.png')}
-                  style={styles.checkImg}
-                />
-              </View> 
-            </View>
-            <View style={styles.artistNameContainer}>
-              <Text style={styles.artistNameText}>
-                tippu
-              </Text>
-            </View>
-          </View>
-          <View style={styles.artistBlock}>
-            <View style={styles.artistImageContainer}>
-              <View style={styles.artistImgContainer}>
-
-              </View>
-              {/* <View style={styles.blockTick}>
-                <Image 
-                  source={require('../assets/icons/check2.png')}
-                  style={styles.checkImg}
-                />
-              </View>  */}
-            </View>
-            <View style={styles.artistNameContainer}>
-              <Text style={styles.artistNameText}>
-                Shreya ghosal
-              </Text>
-            </View>
-          </View>
-
-          <View style={styles.artistBlock}>
-            <View style={styles.artistImageContainer}>
-              <View style={styles.artistImgContainer}>
-
-              </View>
-              {/* <View style={styles.blockTick}>
-                <Image 
-                  source={require('../assets/icons/check2.png')}
-                  style={styles.checkImg}
-                />
-              </View>  */}
-            </View>
-            <View style={styles.artistNameContainer}>
-              <Text style={styles.artistNameText}>
-                unni menon
-              </Text>
-            </View>
-          </View>
-
-          <View style={styles.artistBlock}>
-            <View style={styles.artistImageContainer}>
-              <View style={styles.artistImgContainer}>
-
-              </View>
-              <View style={styles.blockTick}>
-                <Image 
-                  source={require('../assets/icons/check2.png')}
-                  style={styles.checkImg}
-                />
-              </View> 
-            </View>
-            <View style={styles.artistNameContainer}>
-              <Text style={styles.artistNameText}>
-                tippu
-              </Text>
-            </View>
-          </View>
-          <View style={styles.artistBlock}>
-            <View style={styles.artistImageContainer}>
-              <View style={styles.artistImgContainer}>
-
-              </View>
-              {/* <View style={styles.blockTick}>
-                <Image 
-                  source={require('../assets/icons/check2.png')}
-                  style={styles.checkImg}
-                />
-              </View>  */}
-            </View>
-            <View style={styles.artistNameContainer}>
-              <Text style={styles.artistNameText}>
-                Shreya ghosal
-              </Text>
-            </View>
-          </View>
-
-          <View style={styles.artistBlock}>
-            <View style={styles.artistImageContainer}>
-              <View style={styles.artistImgContainer}>
-
-              </View>
-              {/* <View style={styles.blockTick}>
-                <Image 
-                  source={require('../assets/icons/check2.png')}
-                  style={styles.checkImg}
-                />
-              </View>  */}
-            </View>
-            <View style={styles.artistNameContainer}>
-              <Text style={styles.artistNameText}>
-                unni menon
-              </Text>
-            </View>
-          </View>
-
-          <View style={styles.artistBlock}>
-            <View style={styles.artistImageContainer}>
-              <View style={styles.artistImgContainer}>
-
-              </View>
-              <View style={styles.blockTick}>
-                <Image 
-                  source={require('../assets/icons/check2.png')}
-                  style={styles.checkImg}
-                />
-              </View> 
-            </View>
-            <View style={styles.artistNameContainer}>
-              <Text style={styles.artistNameText}>
-                tippu
-              </Text>
-            </View>
-          </View>
-          
-
-          
         </View>
       </ScrollView>
 
@@ -353,11 +123,11 @@ const styles = StyleSheet.create({
   },
   artistsSelectionScreenTitleView: {
     width: '100%',
-    height: screenHeight > 640 ? 185 : 165,
+    height: screenHeight > 640 ? 190 : 165,
     // backgroundColor: 'green',
     marginTop: StatusBar.currentHeight,
     padding: 20,
-    paddingTop: screenHeight > 640 ? 13 : 15
+    paddingTop: screenHeight > 640 ? 18 : 15
   },
   artistsSelectionScreenTitleTextContainer: {
     width: '100%',

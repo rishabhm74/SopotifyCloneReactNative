@@ -22,7 +22,7 @@ const screenWidth = Dimensions.get('window').width;
 const screenHeight = Dimensions.get('window').height;
 
 
-const MusicCategoryBlock = ( props, ref ) => {
+const MusicCategoryBlock = ( props ) => {
   const [ clickState, setClickState ] = useState(false);
 
   const tickStateHandler = () => {
