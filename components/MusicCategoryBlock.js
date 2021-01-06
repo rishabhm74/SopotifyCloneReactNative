@@ -54,7 +54,10 @@ const MusicCategoryBlock = ( props, ref ) => {
             {
               clickState ? 
                 <View style={styles.blockTick}>
-
+                  <Image 
+                    source={require('../assets/icons/check2.png')}
+                    style={styles.checkImg}
+                  />
                 </View> : null
             }
           </View>
@@ -69,12 +72,13 @@ const styles = StyleSheet.create({
     height: screenHeight > 640 ? 78 : 75,
     width: '45.5%',
     backgroundColor: '#fff',
-    borderRadius: 10,
+    borderRadius: screenHeight > 640 ? 10 : 8,
     margin: '2.25%',
     marginTop: 0,
     marginBottom: screenHeight > 640 ? 17 : 15,
     padding: 12,
-    paddingTop: screenHeight > 640 ? 11 : 10
+    paddingTop: screenHeight > 640 ? 11 : 10,
+    paddingRight: screenHeight > 640 ? 10 : 7
   },
   blockInnerView: {
     width: '100%',
@@ -92,7 +96,7 @@ const styles = StyleSheet.create({
     // backgroundColor: 'red',
     alignItems: 'flex-end',
     padding: 5,
-    paddingTop: 2.5
+    paddingTop: screenHeight > 640 ? 2.25 : 1 , 
   },
   blockInnerViewLeftText: {
     color: '#fff',
@@ -102,10 +106,16 @@ const styles = StyleSheet.create({
 
   },
   blockTick: {
-    height: 20,
-    width: 20,
+    height: screenHeight > 640 ? 22.5 : 22.5,
+    width: screenHeight > 640 ? 22.5 : 22.5,
     backgroundColor: '#fff',
-    borderRadius: 50
+    borderRadius: 50,
+    justifyContent: 'center',
+    alignItems: 'center'
+  },
+  checkImg: {
+    height: 11,
+    width: 11
   }
 })
 

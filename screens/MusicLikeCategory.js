@@ -122,7 +122,7 @@ const styles = StyleSheet.create({
     // backgroundColor: 'red',
     marginTop: StatusBar.currentHeight,
     padding: 20,
-    paddingTop: screenHeight > 640 ? 11 : 13,
+    paddingTop: screenHeight > 640 ? 11 : 15,
   },
   musicLikeCategoryTitleViewText: {
     color: '#fff',
@@ -137,7 +137,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     flexWrap: 'wrap',
-    paddingTop: screenHeight > 640 ? 6 : 5,
+    paddingTop: screenHeight > 640 ? 6 : 12,
     overflow: 'hidden'
   },
   nextButtonContainer: {
