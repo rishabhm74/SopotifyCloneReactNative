@@ -24,7 +24,8 @@ const screenHeight = Dimensions.get('window').height;
 const ArtistBlock = (props) => {
   const [ clickState, setClickState ] = useState(false);
 
-  const tickStateHandler = () => {
+  const tickStateHandler = ( theFun ) => {
+    let a = theFun;
     clickState ? setClickState(false) : setClickState(true);
   };
 
@@ -32,15 +33,12 @@ const ArtistBlock = (props) => {
 
   return (
     <TouchableNativeFeedback
-      onPress={props.onPress}
-      onPressIn={() => tickStateHandler()}
+      onPressIn={props.onPressIn}
+      onPressOut={() => tickStateHandler()}
     >
       <View style={styles.artistBlock}>
         <View style={styles.artistImageContainer}>
           <View style={styles.artistImgContainer}>
-            {/* <Text>
-              {props.artistImageUrl}
-            </Text> */}
             <Image 
               source={props.imageUrl}
               style={styles.artistImageImg}
@@ -53,7 +51,7 @@ const ArtistBlock = (props) => {
                 source={require('../assets/icons/check2.png')}
                 style={styles.checkImg}
               />
-            </View>  : null
+            </View> : null
           }
         </View>
         <View style={styles.artistNameContainer}>
@@ -75,7 +73,7 @@ const styles = StyleSheet.create({
     // borderRadius: 500,
     // margin: 
     // borderRightWidth: 1,
-    marginBottom: screenHeight > 640 ? 7 : 7,
+    marginBottom: screenHeight > 640 ? 2 : 2,
     marginTop: 0,
     flexDirection: 'column'
   },
@@ -105,7 +103,7 @@ const styles = StyleSheet.create({
   artistImgContainer: {
     height: (screenWidth/4),
     width: (screenWidth/4),
-    backgroundColor: 'purple',
+    backgroundColor: '#000',
     borderRadius: 1000
   },
   blockTick: {

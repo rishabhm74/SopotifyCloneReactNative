@@ -23,7 +23,10 @@ import { useNavigation } from '@react-navigation/native';
 import { AuthContext } from '../../AuthProvider';
 import AuthenticationActivityLoader from '../../components/AuthenticationActivityLoader';
 
+import database from '@react-native-firebase/database';
+
 import { db } from '../../src/config';
+
 
 const screenWidth = Dimensions.get('window').width;
 const screenHeight = Dimensions.get('window').height;
@@ -76,7 +79,9 @@ const FinalUserNameScreen = ({ route, navigation }) => {
         db.ref('/users').push({
           userName: userNameFromEmail,
           email: userEmail,
-          gender: userGender
+          gender: userGender,
+          musicCategory: [],
+          artists: []
         });
       })
       .catch(error => {

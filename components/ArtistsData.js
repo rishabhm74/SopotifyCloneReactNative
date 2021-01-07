@@ -2,16 +2,16 @@ const imgUrl = '../assets/images/artists/';
 
 
 const ArtistsData = [
-  // {
-  //   name: 'A.R. Rahman',
-  //   imageUrl: require('../assets/images/artists/ARRahman.jpeg')
-  //   // imageUrl: require(`${imgUrl}` + `A.R. Rahman` + `.jpeg`)
-  // },
   {
     name: 'Arijit Singh',
     imageUrl: require('../assets/images/artists/Arijit-Singh.jpeg')
     // imageUrl: require(`${imgUrl}` + `Arijit Singh` + `.jpeg`)
   },
+  // {
+  //     name: 'A.R. Rahman',
+  //     imageUrl: require('../assets/images/artists/ARRahman.jpeg')
+  //     // imageUrl: require(`${imgUrl}` + `A.R. Rahman` + `.jpeg`)
+  // },
   {
     name: 'Coldplay',
     imageUrl: require('../assets/images/artists/Coldplay.jpeg')
@@ -33,8 +33,8 @@ const ArtistsData = [
     // imageUrl: require(`${imgUrl}` + `Himesh Reshammiya` + `.jpeg`)
   },
   {
-    name: 'K.J. Yesudas',
-    imageUrl: require('../assets/images/artists/K.-J.-Yesudas.jpeg')
+    name: 'Jubin Nautiyal',
+    imageUrl: require('../assets/images/artists/Jubin-Nautiyal.jpeg')
     // imageUrl: require(`${imgUrl}` + `K.J. Yesudas` + `.jpeg`)
   },
   {

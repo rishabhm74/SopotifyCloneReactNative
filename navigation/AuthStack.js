@@ -91,6 +91,7 @@ const AuthStack = ({navigation}) => {
         }}
       />
       
+      
     </AuthStackStack.Navigator>
   )
 }

@@ -107,7 +107,7 @@ const styles = StyleSheet.create({
   }, 
   signUpScreen: {
     width: screenWidth,
-    height: screenHeight > 640 ? 190 : 170,
+    height: screenHeight > 640 ? 180 : 160,
     // backgroundColor: 'red',
     flexDirection: 'column',
     alignItems: 'flex-start',

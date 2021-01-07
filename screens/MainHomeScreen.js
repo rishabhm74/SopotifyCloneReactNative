@@ -48,12 +48,6 @@ const MainHomeScreen = () => {
     <View style={styles.mainHomeScreenView}>
       <StatusBar barStyle="light-content" translucent={true} backgroundColor="#14141499" />
 
-      <Text>
-        ssdsd
-      </Text>
-      <Text>
-        ssdsd
-      </Text>
 
       <Button
         title="logout"
@@ -70,7 +64,9 @@ const styles = StyleSheet.create({
     flex: 1,
     height: screenHeight,
     width: screenWidth,
-    backgroundColor: '#141414'
+    backgroundColor: '#141414',
+    justifyContent: 'center',
+    alignItems: 'center'
   }
 })
 

@@ -1,4 +1,4 @@
-import React, { useContext, useState, useRef } from 'react';
+import React, { useState } from 'react';
 import {
   SafeAreaView,
   StyleSheet,
@@ -67,7 +67,9 @@ const MusicLikeCategory = ({ navigation }) => {
 
 
   const MoveToArtistsScreen = () => {
-    return navigation.navigate('ArtistsSelectScreen');
+    return navigation.navigate('ArtistsSelectScreen', {
+      musicCategoryList: categoryList
+    });
   }
 
   return (

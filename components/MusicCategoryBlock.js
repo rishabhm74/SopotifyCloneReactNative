@@ -53,7 +53,9 @@ const MusicCategoryBlock = ( props ) => {
           <View  style={styles.blockInnerViewRight}>
             {
               clickState ? 
-                <View style={styles.blockTick}>
+                <View 
+                style={styles.blockTick}
+                >
                   <Image 
                     source={require('../assets/icons/check2.png')}
                     style={styles.checkImg}
@@ -78,7 +80,7 @@ const styles = StyleSheet.create({
     marginBottom: screenHeight > 640 ? 17 : 15,
     padding: 12,
     paddingTop: screenHeight > 640 ? 11 : 9,
-    paddingRight: screenHeight > 640 ? 10 : 7
+    paddingRight: screenHeight > 640 ? 10 : 7,
   },
   blockInnerView: {
     width: '100%',
