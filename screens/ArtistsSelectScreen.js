@@ -93,7 +93,7 @@ const ArtistsSelectScreen = ({ navigation, route }) => {
       })
       .then(() => {
           console.log("data updated");
-          navigation.navigate('MainHomeScreen');
+          // navigation.navigate('MainHomeScreen');
         })
       .catch(error => console.log(error))
       

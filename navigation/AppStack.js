@@ -1,15 +1,4 @@
 import React, { useContext, useState } from 'react';
-import {
-  SafeAreaView,
-  StyleSheet,
-  ScrollView,
-  View,
-  Text,
-  StatusBar,
-  Image,
-  TouchableNativeFeedback,
-  Button
-} from 'react-native';
 import { createStackNavigator, CardStyleInterpolators } from '@react-navigation/stack';
 
 import MainHomeScreen from '../screens/MainHomeScreen';
@@ -60,21 +49,11 @@ const AppStack = ({navigation}) => {
   return (
 
     <AppStackStack.Navigator 
-      initialRouteName={"MusicLikeCategory" }
+      initialRouteName={"MainHomeScreen" }
       screenOptions={{
         cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS
       }}
     >
-      <AppStackStack.Screen 
-        name="MusicLikeCategory"
-        component={MusicLikeCategory}
-        options={{header: () => null}}
-      />
-      <AppStackStack.Screen 
-        name="ArtistsSelectScreen"
-        component={ArtistsSelectScreen}
-        options={{header: () => null}}
-      />
       <AppStackStack.Screen
         name="MainHomeScreen"
         component={MainHomeScreen}
