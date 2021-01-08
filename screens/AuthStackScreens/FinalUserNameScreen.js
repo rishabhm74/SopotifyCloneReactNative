@@ -1,29 +1,17 @@
 import React, { useContext, useState } from 'react';
 import {
-  SafeAreaView,
   StyleSheet,
-  ScrollView,
   View,
   Text,
-  StatusBar,
-  Image,
-  Button,
   TouchableNativeFeedback,
   Dimensions,
-  Alert,
   TextInput,
-  ActivityIndicator,
   Keyboard,
-  Animated,
-  TouchableOpacity
 } from 'react-native';
 
 import AuthStackHeader from '../../components/AuthStackHeader';
-import { useNavigation } from '@react-navigation/native';
 import { AuthContext } from '../../AuthProvider';
 import AuthenticationActivityLoader from '../../components/AuthenticationActivityLoader';
-
-import database from '@react-native-firebase/database';
 
 import { db } from '../../src/config';
 

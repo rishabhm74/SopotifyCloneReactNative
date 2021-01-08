@@ -20,7 +20,6 @@ import ArtistsData from '../components/ArtistsData';
 import ArtistBlock from '../components/ArtistBlock';
 import { AuthContext } from '../AuthProvider';
 import database from '@react-native-firebase/database';
-import { db } from '../src/config';
 
  
 
@@ -35,7 +34,6 @@ const ArtistsSelectScreen = ({ navigation, route }) => {
   var [ artistList, setArtistList ] = useState([]);
   const [ artistListLength, setArtistListLength] = useState(false);
   const { musicCategoryList } = route.params;
-  const [ loggedUserName, setLoggedUserName ] = useState('');
 
 
   const setArtistListHandler = (theVar) => {
@@ -52,7 +50,7 @@ const ArtistsSelectScreen = ({ navigation, route }) => {
     }
 
 
-    console.log(artistList);
+    return ;
 
   }
 
@@ -66,50 +64,43 @@ const ArtistsSelectScreen = ({ navigation, route }) => {
   )
 
 
+  // const doneWithArtistSelection = () => {
+  //   const finalMusicCategoryList = musicCategoryList;
+  //   const finalArtistsList = artistList;
+  //   setArtistList([]);
+  //   let found;
+  //   let userKey;
+  //   userDbReference.on('value', function(snapshot) {
+  //     const userData = snapshot.val();
+  //     if ( userData !== null ) {
+  //       Object.keys(userData).forEach(key => {
+  //         let tempUserData = userData[key];
+  //         if (tempUserData.email === user.email) {
+  //           userKey = key;
+  //         }
+  //       })
+  //     }
+  //     database()
+  //     .ref(`/users/${userKey}`)
+  //     .update({
+  //       artists: finalArtistsList,
+  //       musicCategory: finalMusicCategoryList
+  //     })
+  //     .then(() => {
+  //         console.log("data updated");
+  //         return navigation.navigate('MainHomeScreen');
+  //       })
+  //     .catch(error => console.log(error))
+
+  //   })
+
+  //   return;
+  // }
+
   const doneWithArtistSelection = () => {
-    // console.log("Data to send: ");
-    // console.log(musicCategoryList);
-    // console.log(artistList, '\n\n\n');
-    let found;
-    let userKey;
-    userDbReference.on('value', function(snapshot) {
-      const userData = snapshot.val();
-      if ( userData !== null ) {
-        Object.keys(userData).forEach(key => {
-          // console.log(key);
-          // console.log(userData[key], '\n\n\n\n');
-          let tempUserData = userData[key];
-          if (tempUserData.email === user.email) {
-            // console.log("The list: ", tempUserData.artists)
-            userKey = key;
-          }
-        })
-      }
-      database()
-      .ref(`/users/${userKey}`)
-      .update({
-        artists: artistList,
-        musicCategory: musicCategoryList
-      })
-      .then(() => {
-          console.log("data updated");
-          // navigation.navigate('MainHomeScreen');
-        })
-      .catch(error => console.log(error))
-      
-
-
-      // console.log("tempData: ", tempData);
-      // let tempData1 = tempData.filter(data => data.email == user.email);
-      // console.log("tempData1: ", tempData1)
-      // let tempData2 = tempData1[0]
-      // console.log("tempData2: ", tempData2)
-      // setLoggedUserName(tempData2.userName)
-    })
-
-    // console.log(user.email)
+    console.log("done with artist selection");
+    return navigation.navigate('MainHomeScreen');
   }
-
 
   return (
     <View style={styles.mainArtistsSelectScreenView}>

@@ -1,19 +1,11 @@
 import React, { useState } from 'react';
 import {
-  SafeAreaView,
   StyleSheet,
-  ScrollView,
   View,
   Text,
   StatusBar,
-  Image,
-  Button,
   TouchableNativeFeedback,
   Dimensions,
-  Alert,
-  TextInput,
-  ActivityIndicator,
-  Keyboard
 } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
 import MusicCategoryBlock from '../components/MusicCategoryBlock';
@@ -67,8 +59,10 @@ const MusicLikeCategory = ({ navigation }) => {
 
 
   const MoveToArtistsScreen = () => {
+    const tempList = categoryList;
+    setCategoryList([]);
     return navigation.navigate('ArtistsSelectScreen', {
-      musicCategoryList: categoryList
+      musicCategoryList: tempList
     });
   }
 
@@ -92,7 +86,7 @@ const MusicLikeCategory = ({ navigation }) => {
 
 
       {
-        categoryListLength  ? // changed
+        categoryListLength  ? 
         <View 
           style={styles.nextButtonContainer}
         >

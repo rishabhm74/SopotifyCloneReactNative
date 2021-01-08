@@ -1,4 +1,3 @@
-// import Firebase from '@react-native-firebase/app';
 import Firebase from "firebase";
 
 var firebaseConfig = {
