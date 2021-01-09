@@ -15,7 +15,6 @@ import {
   ActivityIndicator,
   Keyboard
 } from 'react-native';
-
 import LoginHeader from '../../components/LoginHeader';
 import { useNavigation } from '@react-navigation/native';
 import { AuthContext } from '../../AuthProvider';

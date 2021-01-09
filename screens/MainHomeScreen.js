@@ -21,6 +21,7 @@ const MainHomeScreen = () => {
 
   return (
     <View style={styles.mainHomeScreenView}>
+
       <StatusBar barStyle="light-content" translucent={true} backgroundColor="#14141499" />
 
 

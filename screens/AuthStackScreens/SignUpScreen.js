@@ -13,7 +13,6 @@ import {
   Alert,
   TextInput
 } from 'react-native';
-
 import AuthStackHeader from '../../components/AuthStackHeader';
 
 

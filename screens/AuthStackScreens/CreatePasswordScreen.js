@@ -41,6 +41,7 @@ const CreatePasswordScreen = ({ route }) => {
   
   return (
     <View style={styles.signUpScreenView}>
+      
       <AuthStackHeader />
       <View style={styles.signUpScreen}>
         <Text style={styles.whatsYourEmailText}>
