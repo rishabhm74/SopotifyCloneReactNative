@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useState, useEffect } from 'react';
 import { createStackNavigator, CardStyleInterpolators } from '@react-navigation/stack';
 
 import MainHomeScreen from '../screens/MainHomeScreen';
@@ -10,11 +10,16 @@ import ArtistsSelectScreen from '../screens/ArtistsSelectScreen';
 const AppStackStack = createStackNavigator();
 
 
-const AppStack = ({navigation}) => {
+const AppStack = () => {
+  const [ isUpdated, setIsUpdated ] = useState(false);
+
+
+
   return (
 
     <AppStackStack.Navigator 
-      initialRouteName={"MusicLikeCategory" }
+      initialRouteName= { isUpdated ? 'MainHomeScreen' : 'MusicLikeCategory'  }
+      // initialRouteName={"MusicLikeCategory" }
       screenOptions={{
         cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS
       }}

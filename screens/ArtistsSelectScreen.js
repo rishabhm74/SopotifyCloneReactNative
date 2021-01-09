@@ -16,6 +16,7 @@ import {
   Keyboard
 } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
+import { StackActions, CommonActions } from '@react-navigation/native';
 import ArtistsData from '../components/ArtistsData';
 import ArtistBlock from '../components/ArtistBlock';
 import { AuthContext } from '../AuthProvider';
@@ -54,15 +55,7 @@ const ArtistsSelectScreen = ({ navigation, route }) => {
 
   }
 
-  const artistsBlockArray = ArtistsData.map((artist) => 
-    <ArtistBlock 
-      onPressIn={() => setArtistListHandler(artist.name)}
-      imageUrl = {artist.imageUrl}
-      artistName = {artist.name}
-      key={artist.name}
-    />
-  )
-
+  
 
   // const doneWithArtistSelection = () => {
   //   const finalMusicCategoryList = musicCategoryList;
@@ -91,16 +84,58 @@ const ArtistsSelectScreen = ({ navigation, route }) => {
   //         return navigation.navigate('MainHomeScreen');
   //       })
   //     .catch(error => console.log(error))
-
+  
   //   })
-
+  
   //   return;
   // }
-
+  
   const doneWithArtistSelection = () => {
+    let finalArtistsList = artistList;
+    setArtistList([]);
     console.log("done with artist selection");
-    return navigation.navigate('MainHomeScreen');
+    console.log("Final Music: ", musicCategoryList);
+    console.log("Final Artists: ", finalArtistsList);
+    const resetState = navigation.dispatch(
+      CommonActions.reset({
+        index: 1,
+        routes: [
+          {
+            name: 'MainHomeScreen',
+          }
+        ]
+      })
+    )
+    return resetState;
+
+    // return navigation.navigate('MainHomeScreen');
   }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  const artistsBlockArray = ArtistsData.map((artist) => 
+    <ArtistBlock 
+      onPressIn={() => setArtistListHandler(artist.name)}
+      imageUrl = {artist.imageUrl}
+      artistName = {artist.name}
+      key={artist.name}
+    />
+  )
 
   return (
     <View style={styles.mainArtistsSelectScreenView}>
@@ -108,7 +143,7 @@ const ArtistsSelectScreen = ({ navigation, route }) => {
         barStyle="light-content"
         backgroundColor="#14141499"
         translucent={true}
-
+        
       />
       
       <View style={styles.artistsSelectionScreenTitleView}>
@@ -122,7 +157,7 @@ const ArtistsSelectScreen = ({ navigation, route }) => {
             <Image 
               source={require('../assets/icons/search.png')}
               style={styles.searchIcon}
-            />
+              />
           </View>
           <View style={styles.artistsSearchContainerSearchBarContainer}>
             <TextInput 
@@ -134,7 +169,7 @@ const ArtistsSelectScreen = ({ navigation, route }) => {
               autoFocus={false}
               onChangeText={(artistText) => setArtistName(artistText) }
               placeholderTextColor="#ffffff50"
-            />
+              />
           </View>
         </View>
       </View> 
@@ -143,7 +178,7 @@ const ArtistsSelectScreen = ({ navigation, route }) => {
         showsVerticalScrollIndicator={false}
         bounces={true}
         style={styles.artistsScrollView}
-      >
+        >
         <View style={styles.artistsScrollViewInnerView}>
           {artistsBlockArray}
         </View>
@@ -156,11 +191,11 @@ const ArtistsSelectScreen = ({ navigation, route }) => {
         >
           <View 
             style={styles.nextButtonContainer}
-          >
+            >
             {
-            artistListLength  ?
+              artistListLength  ?
               <TouchableNativeFeedback
-                onPress={() => doneWithArtistSelection()}
+              onPress={() => doneWithArtistSelection()}
               >
                 <View style={styles.nextButtonContainerView}>
                   <Text  style={styles.nextButtonContainerViewText}>
@@ -280,6 +315,7 @@ const styles = StyleSheet.create({
     fontFamily: 'Product Sans Bold 700',
     letterSpacing: 0.5
   }
+  
 })
 
 export default  ArtistsSelectScreen;

@@ -8,8 +8,10 @@ import {
   Dimensions,
 } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
+import { StackActions, CommonActions } from '@react-navigation/native';
 import MusicCategoryBlock from '../components/MusicCategoryBlock';
 import MusicCategoryBlockGradients from '../components/MusicCategoryBlockGradients';
+import { set } from 'react-native-reanimated';
 
 
 
@@ -42,29 +44,40 @@ const MusicLikeCategory = ({ navigation }) => {
 
 
   let gradeintBlocks = MusicCategoryBlockGradients.map(
-      (block) => 
-        <MusicCategoryBlock 
-          gradientLeftColor = {block.gradientLeftColor}
-          gradientRightColor = {block.gradientRightColor}
-          musicCategory = {block.musicCategory}
-          key = {block.key}
-          clickState= {false}
-          onPress={() => setCategoryListHandler(block.key)}
-        /> 
-      
-    )
-  
-
+    (block) => 
+      <MusicCategoryBlock 
+        gradientLeftColor = {block.gradientLeftColor}
+        gradientRightColor = {block.gradientRightColor}
+        musicCategory = {block.musicCategory}
+        key = {block.key}
+        clickState= {false}
+        onPress={() => setCategoryListHandler(block.key)}
+      /> 
     
+  )
+  
 
 
   const MoveToArtistsScreen = () => {
-    const tempList = categoryList;
+    let tempList = categoryList;
     setCategoryList([]);
-    return navigation.navigate('ArtistsSelectScreen', {
-      musicCategoryList: tempList
-    });
+    const resetState = navigation.dispatch(
+      CommonActions.reset({
+        index: 1,
+        routes: [
+          {
+            name: 'ArtistsSelectScreen',
+            params: { musicCategoryList: tempList }
+          }
+        ]
+      })
+    )
+    return resetState;
   }
+
+  // return navigation.navigate('ArtistsSelectScreen', {
+  //   musicCategoryList: tempList
+  // });
 
   return (
     <View style={styles.mainMusicLikeCategoryView}>
