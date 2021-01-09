@@ -35,6 +35,7 @@ const ArtistsSelectScreen = ({ navigation, route }) => {
   var [ artistList, setArtistList ] = useState([]);
   const [ artistListLength, setArtistListLength] = useState(false);
   const { musicCategoryList } = route.params;
+  // const { musicCategoryList } = ["abc", "def"];
 
 
   const setArtistListHandler = (theVar) => {
@@ -50,83 +51,60 @@ const ArtistsSelectScreen = ({ navigation, route }) => {
       artistList.length < 3 ? setArtistListLength(false) : null;
     }
 
-
     return ;
-
   }
 
   
-
-  // const doneWithArtistSelection = () => {
-  //   const finalMusicCategoryList = musicCategoryList;
-  //   const finalArtistsList = artistList;
-  //   setArtistList([]);
-  //   let found;
-  //   let userKey;
-  //   userDbReference.on('value', function(snapshot) {
-  //     const userData = snapshot.val();
-  //     if ( userData !== null ) {
-  //       Object.keys(userData).forEach(key => {
-  //         let tempUserData = userData[key];
-  //         if (tempUserData.email === user.email) {
-  //           userKey = key;
-  //         }
-  //       })
-  //     }
-  //     database()
-  //     .ref(`/users/${userKey}`)
-  //     .update({
-  //       artists: finalArtistsList,
-  //       musicCategory: finalMusicCategoryList
-  //     })
-  //     .then(() => {
-  //         console.log("data updated");
-  //         return navigation.navigate('MainHomeScreen');
-  //       })
-  //     .catch(error => console.log(error))
-  
-  //   })
-  
-  //   return;
-  // }
   
   const doneWithArtistSelection = () => {
+    var userId = null;
     let finalArtistsList = artistList;
     setArtistList([]);
     console.log("done with artist selection");
     console.log("Final Music: ", musicCategoryList);
     console.log("Final Artists: ", finalArtistsList);
-    const resetState = navigation.dispatch(
-      CommonActions.reset({
-        index: 1,
-        routes: [
-          {
-            name: 'MainHomeScreen',
-          }
-        ]
-      })
-    )
-    return resetState;
 
-    // return navigation.navigate('MainHomeScreen');
+    userDbReference.once('value')
+    .then(snaapshot => {
+      const userData = snaapshot.val();
+      if (userData !== null) {
+        Object.keys(userData).forEach(key => {
+          if (userData[key].email === user.email) {
+            console.log("Our guy: ", key);
+            userId = key;
+            let ourGuy = userData[key];
+            if ( ourGuy ) {
+              console.log(ourGuy);
+              if (ourGuy.artists == undefined && ourGuy.musicCategory == undefined)  {
+                database()
+                .ref(`/users/${userId}`)
+                .update({
+                  artists: finalArtistsList,
+                  musicCategory: musicCategoryList
+                })
+                .then(() => {
+                  console.log("data updated");
+                  const resetState = navigation.dispatch(
+                    CommonActions.reset({
+                      index: 1,
+                      routes: [
+                        {
+                          name: 'MainHomeScreen',
+                        }
+                      ]
+                    })
+                  )
+                  return resetState;
+                })
+                .catch(error => console.log(error))
+              }
+            } 
+          } 
+        })
+      } 
+    })
+
   }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
   const artistsBlockArray = ArtistsData.map((artist) => 
     <ArtistBlock 

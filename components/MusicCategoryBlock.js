@@ -16,7 +16,6 @@ import {
   Keyboard
 } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
-import CheckBox from '@react-native-community/checkbox';
 
 const screenWidth = Dimensions.get('window').width;
 const screenHeight = Dimensions.get('window').height;

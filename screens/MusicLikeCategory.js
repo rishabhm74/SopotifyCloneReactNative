@@ -7,11 +7,9 @@ import {
   TouchableNativeFeedback,
   Dimensions,
 } from 'react-native';
-import LinearGradient from 'react-native-linear-gradient';
 import { StackActions, CommonActions } from '@react-navigation/native';
 import MusicCategoryBlock from '../components/MusicCategoryBlock';
 import MusicCategoryBlockGradients from '../components/MusicCategoryBlockGradients';
-import { set } from 'react-native-reanimated';
 
 
 
@@ -75,9 +73,6 @@ const MusicLikeCategory = ({ navigation }) => {
     return resetState;
   }
 
-  // return navigation.navigate('ArtistsSelectScreen', {
-  //   musicCategoryList: tempList
-  // });
 
   return (
     <View style={styles.mainMusicLikeCategoryView}>

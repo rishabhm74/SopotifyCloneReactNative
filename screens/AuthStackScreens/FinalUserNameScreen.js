@@ -68,8 +68,8 @@ const FinalUserNameScreen = ({ route, navigation }) => {
           userName: userNameFromEmail,
           email: userEmail,
           gender: userGender,
-          musicCategory: [],
-          artists: []
+          musicCategory: [null],
+          artists: [null]
         });
       })
       .catch(error => {
