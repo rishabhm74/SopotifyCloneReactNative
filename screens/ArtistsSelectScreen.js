@@ -60,9 +60,9 @@ const ArtistsSelectScreen = ({ navigation, route }) => {
     var userId = null;
     let finalArtistsList = artistList;
     setArtistList([]);
-    console.log("done with artist selection");
-    console.log("Final Music: ", musicCategoryList);
-    console.log("Final Artists: ", finalArtistsList);
+    // console.log("done with artist selection");
+    // console.log("Final Music: ", musicCategoryList);
+    // console.log("Final Artists: ", finalArtistsList);
 
     userDbReference.once('value')
     .then(snaapshot => {
@@ -70,7 +70,7 @@ const ArtistsSelectScreen = ({ navigation, route }) => {
       if (userData !== null) {
         Object.keys(userData).forEach(key => {
           if (userData[key].email === user.email) {
-            console.log("Our guy: ", key);
+            // console.log("Our guy: ", key);
             userId = key;
             let ourGuy = userData[key];
             if ( ourGuy ) {
@@ -83,7 +83,7 @@ const ArtistsSelectScreen = ({ navigation, route }) => {
                   musicCategory: musicCategoryList
                 })
                 .then(() => {
-                  console.log("data updated");
+                  // console.log("data updated");
                   const resetState = navigation.dispatch(
                     CommonActions.reset({
                       index: 1,

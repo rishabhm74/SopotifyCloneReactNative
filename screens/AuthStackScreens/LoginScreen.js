@@ -59,7 +59,8 @@ const LoginScreen = () => {
       if (reg.test(loginEmail) === true){
         Keyboard.dismiss();
         setLoading(!loading);
-        login(loginEmail, loginPassword).catch(error => {
+        login(loginEmail, loginPassword)
+        .catch(error => {
           if (error.code === 'auth/user-disabled') {
             setOccuredError('This email address has been disabled.');
             setLoading(false);
@@ -78,6 +79,7 @@ const LoginScreen = () => {
             somethingWentWrong == false ? setSomethingWentWrong(true) : null;
             setLoading(false);
           }
+          
           return false
         });
       } 

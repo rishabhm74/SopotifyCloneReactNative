@@ -18,7 +18,7 @@ import MainAppStack from './navigation/MainAppStack';
 
 
 const Routes = () => {
-  const { user, setUser } = useContext(AuthContext);
+  const { user, setUser} = useContext(AuthContext);
   const [ initializing, setInitializing ] = useState(true);
 
   const onAuthStateChanged = (user) => {

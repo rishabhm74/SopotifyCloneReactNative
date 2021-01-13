@@ -1,20 +1,5 @@
 import React, { createContext, useState } from 'react';
-import {
-  SafeAreaView,
-  StyleSheet,
-  ScrollView,
-  View,
-  Text,
-  StatusBar,
-  Image,
-  Button,
-  TouchableNativeFeedback,
-  Dimensions,
-  Alert,
-  TextInput,
-  ActivityIndicator,
-  Keyboard
-} from 'react-native';
+
 import auth from '@react-native-firebase/auth';
 
 export const AuthContext = createContext();
@@ -22,7 +7,7 @@ export const AuthContext = createContext();
 
 
 export const AuthProvider = ({ children }) => {
-  const [user, setUser] = useState(null);
+  const [ user, setUser ] = useState(null);
   
   return (
     <AuthContext.Provider
@@ -37,7 +22,7 @@ export const AuthProvider = ({ children }) => {
         ,
         register: (email, password) => auth().createUserWithEmailAndPassword(email, password).
         then(() => {
-          console.log("user created")
+          console.log("user created");
           return true
         })
         ,

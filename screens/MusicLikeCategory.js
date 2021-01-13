@@ -36,7 +36,7 @@ const MusicLikeCategory = ({ navigation }) => {
       categoryList.length == 0 ? setCategoryListLength(false) : null;
     }
 
-    console.log(categoryList);
+    // console.log(categoryList);
   }
 
 
