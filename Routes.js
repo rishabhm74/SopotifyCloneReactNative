@@ -16,6 +16,9 @@ import AuthStack from './navigation/AuthStack';
 import MainAppStack from './navigation/MainAppStack';
 
 
+import MainHomeScreen from './screens/MainHomeScreen';
+
+
 
 const Routes = () => {
   const { user, setUser} = useContext(AuthContext);
@@ -40,11 +43,8 @@ const Routes = () => {
 
   return (
     <NavigationContainer>
-        {/* <View style={styles.mainAppView}> */}
-          {/* { user ?   <AppStack /> : <AuthStack />} */}
-          { user ?   <MainAppStack /> : <AuthStack />}
-          
-        {/* </View> */}
+          {/* { user ?   <MainAppStack /> : <AuthStack />} */}
+          <MainHomeScreen />
     </NavigationContainer>
   )
 }

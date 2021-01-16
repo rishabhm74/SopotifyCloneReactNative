@@ -22,6 +22,7 @@ import FinalUserNameScreen from '../screens/AuthStackScreens/FinalUserNameScreen
 import LoginScreen from '../screens/AuthStackScreens/LoginScreen';
 import PhoneAuthScreen from '../screens/AuthStackScreens/PhoneAuthScreen';
 
+import MainHomeScreen from '../screens/MainHomeScreen';
 
 
 
@@ -36,6 +37,12 @@ const AuthStack = ({navigation}) => {
         cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS
       }}
     >
+     {/* <AuthStackStack.Navigator 
+    //   initialRouteName="MainHomeScreen"
+    //   screenOptions={{
+    //     cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS
+    //   }}
+    // > */}
       <AuthStackStack.Screen
         name="LoginGreet"
         component={LoginGreetScreen}
@@ -90,6 +97,13 @@ const AuthStack = ({navigation}) => {
           header: () => null
         }}
       />
+      {/* <AuthStackStack.Screen
+        name="MainHomeScreen"
+        component={MainHomeScreen}
+        options={{ 
+          header: () => null
+        }}
+      /> */}
       
       
     </AuthStackStack.Navigator>
