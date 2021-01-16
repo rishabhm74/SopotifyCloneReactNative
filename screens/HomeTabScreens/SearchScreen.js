@@ -85,7 +85,7 @@ const styles = StyleSheet.create({
     height: 202,
     width: '100%',
     backgroundColor: '#141414',
-    padding: 15,
+    padding: 18,
     justifyContent:'flex-end'
   },
   searchTitleText: {
@@ -125,9 +125,10 @@ const styles = StyleSheet.create({
     color: '#fff',
     fontFamily: 'Product Sans Bold 700',
     fontSize: 17,
-    padding: 15,
-    paddingTop: 10,
-    paddingLeft: 18,
+    padding: 18,
+    paddingTop: 5,
+    paddingLeft: 22,
+    paddingBottom: 10
   },
   browseBlocksContainer: {
     width: '100%',

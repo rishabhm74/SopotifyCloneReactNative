@@ -30,19 +30,19 @@ const FocuedTab = ( props ) => {
     <View style={{ justifyContent: 'center', alignItems: 'center' }}>
       { props.iconName === 'home'? <Image 
         source={require(`../assets/icons/home.png`)}
-        style={{ height: 28, width: 28, marginBottom: 2.5 }}
+        style={{ height: 28, width: 28, marginBottom: 5 }}
       /> : null}
       { props.iconName === 'search'? <Image 
         source={require(`../assets/icons/search2.png`)}
-        style={{ height: 28, width: 28, marginBottom: 2.5 }}
+        style={{ height: 28, width: 28, marginBottom: 5 }}
       /> : null}
       { props.iconName === 'Your library'? <Image 
         source={require(`../assets/icons/library.png`)}
-        style={{ height: 28, width: 28, marginBottom: 2.5 }}
+        style={{ height: 28, width: 28, marginBottom: 5 }}
       /> : null}
       { props.iconName === 'premium'? <Image 
         source={require(`../assets/icons/spotify.png`)}
-        style={{ height: 28, width: 28, marginBottom: 2.5 }}
+        style={{ height: 28, width: 28, marginBottom: 5 }}
       /> : null}
       <Text style={{ color: '#fff', fontSize: 10.5, textTransform: 'capitalize', fontFamily:'Product-Sans-Regular' }}>
         {props.iconName}

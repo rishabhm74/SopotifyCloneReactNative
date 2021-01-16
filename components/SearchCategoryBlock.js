@@ -36,7 +36,7 @@ const styles = StyleSheet.create({
   searchCategoryBlock: {
     height: 110,
     // backgroundColor: '#eee',
-    width: '44%',
+    width: '43.5%',
     margin: '2%',
     borderRadius: 7,
     marginTop: 0,
