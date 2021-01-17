@@ -13,7 +13,7 @@ import {
 } from 'react-native';
 
 import SearchCategoryBlock from '../../components/SearchCategoryBlock';
-import SearchCategoryBlockData from '../../components/SearchCategoryBlockData';
+import SearchCategoryBlockData from '../../src/data/SearchCategoryBlockData';
 
 const screenWidth = Dimensions.get('window').width;
 const screenHeight = Dimensions.get('window').height;

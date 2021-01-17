@@ -9,7 +9,7 @@ import {
 } from 'react-native';
 import { StackActions, CommonActions } from '@react-navigation/native';
 import MusicCategoryBlock from '../components/MusicCategoryBlock';
-import MusicCategoryBlockGradients from '../components/MusicCategoryBlockGradients';
+import MusicCategoryBlockGradients from '../src/data/MusicCategoryBlockGradients';
 
 
 

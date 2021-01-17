@@ -34,7 +34,7 @@ const SearchCategoryBlock = (props) => {
 
 const styles = StyleSheet.create({
   searchCategoryBlock: {
-    height: 110,
+    height: 100,
     // backgroundColor: '#eee',
     width: '43.5%',
     margin: '2%',
