@@ -80,7 +80,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#141414',
   },
   searchScreenTitleContainer: {
-    height: screenHeight > 640 ? 200 : 175,
+    height: screenHeight > 640 ? 190 : 175,
     width: '100%',
     backgroundColor: '#141414',
     padding: 15,
@@ -90,7 +90,7 @@ const styles = StyleSheet.create({
     color: '#fff',
     fontFamily: 'Product Sans Bold 700',
     fontSize: screenHeight > 640 ? 35 : 32,
-    marginBottom: screenHeight > 640 ? 17 : 14
+    marginBottom: screenHeight > 640 ? 16 : 14
   },
   searchBarContainer: {
     width: '100%',
@@ -118,7 +118,7 @@ const styles = StyleSheet.create({
     height: '100%',
     color: '#292929',
     fontFamily: 'Product Sans Bold 700',
-    fontSize: screenHeight > 640 ? 17 : 15,
+    fontSize: screenHeight > 640 ? 16 : 15,
   },
   browseAllText: {
     color: '#fff',
@@ -127,7 +127,7 @@ const styles = StyleSheet.create({
     padding: 16,
     paddingTop: 5,
     paddingLeft: 18,
-    paddingBottom: 10
+    paddingBottom: screenHeight > 640 ? 8 : 10
   },
   browseBlocksContainer: {
     width: '100%',

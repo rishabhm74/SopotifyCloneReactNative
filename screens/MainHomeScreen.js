@@ -117,13 +117,13 @@ const MainHomeScreen = () => {
             fontSize: 0
         },
         style: {
-          height: screenHeight > 640 ? 65 : 58,
+          height: screenHeight > 640 ? 60 : 58,
           width: '100%',
           elevation: 0,
           borderTopWidth: 0,
           // paddingBottom: 8,
-          paddingLeft: '2.5%',
-          paddingRight: '2.5%',
+          // paddingLeft: '2.5%',
+          // paddingRight: '2.5%',
           backgroundColor: '#292929'
         },
         keyboardHidesTabBar: true
@@ -161,13 +161,13 @@ const styles = StyleSheet.create({
     alignItems: 'center'
   },
   focusedTabIcon: { 
-    height: screenHeight > 640 ? 28 : 22.5, 
-    width: screenHeight > 640 ? 28 : 22.5, 
+    height: screenHeight > 640 ? 26 : 22.5, 
+    width: screenHeight > 640 ? 26 : 22.5, 
     marginBottom: 5 
   },
   notFocusedTabIcon: { 
-    height: screenHeight > 640 ? 28 : 22.5, 
-    width: screenHeight > 640 ? 28 : 22.5, 
+    height: screenHeight > 640 ? 26 : 22.5, 
+    width: screenHeight > 640 ? 26 : 22.5, 
     opacity: 0.6 
   }
 })

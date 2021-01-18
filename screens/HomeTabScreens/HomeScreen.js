@@ -16,6 +16,11 @@ import GetYouStartedBlock from '../../components/GetYouStartedBlock';
 import GetYouStartedBlockData from '../../src/data/GetYouStartedBlockData';
 import SuggestedArtistBlock from '../../components/SuggestedArtistBlock';
 import SuggestedArtistBlockData from '../../src/data/SuggestedArtistBlockData';
+import RecommendedAlbumBlock from '../../components/RecommendedAlbumBlock';
+import RecommendedAlbumBlockData from '../../src/data/RecommendedAlbumBlockData';
+import TrendingBlock from '../../components/TrendingBlock';
+
+
 
 const screenWidth = Dimensions.get('window').width;
 const screenHeight = Dimensions.get('window').height;
@@ -23,13 +28,16 @@ const screenHeight = Dimensions.get('window').height;
 
 const HomeScreen = () => {
   const getYouStartedBlocks = GetYouStartedBlockData.map(startedBlock   =>  <GetYouStartedBlock 
+        key = {startedBlock.id}
         colorStart = {startedBlock.colorStart}
         colorMiddle = {startedBlock.colorMiddle}
         colorEnd = {startedBlock.colorEnd}
         albumMainTitle = {startedBlock.albumMainTitle}
         albumSubTitle = {startedBlock.albumSubTitle}
         artistsName = {startedBlock.artistsName}
-        key = {startedBlock.id}
+        albumArtStartImg = {startedBlock.albumArtStartImg}
+        albumArtMiddleImg = {startedBlock.albumArtMiddleImg}
+        albumArtEndImg = {startedBlock.albumArtEndImg}
       />
     )
 
@@ -38,6 +46,15 @@ const HomeScreen = () => {
         key = {suggestedArtist.id}
         suggestedArtistImgPath = {suggestedArtist.suggestedArtistImgPath}
         suggestedArtistName = {suggestedArtist.suggestedArtistName}
+      />
+    )
+
+  const RecommendedAlbumBlockDatas = RecommendedAlbumBlockData.map(recommendedAlbum => 
+      <RecommendedAlbumBlock 
+        key = {recommendedAlbum.id}
+        albumArt = {recommendedAlbum.albumArt}
+        albumTitle = {recommendedAlbum.albumTitle}
+        albumArtists = {recommendedAlbum.albumArtists}
       />
     )
 
@@ -72,20 +89,56 @@ const HomeScreen = () => {
 
         </View>
 
-
         <View style={styles.madeForYouContainer}> 
           <Text style={{ color: '#fff', fontSize: 20, fontFamily: 'Product Sans Bold 700', textAlign: 'center' }} > 
             Made for you
           </Text>
           <View style={styles.madeForYouAlbum}>
-            <Image 
+            {/* <Image 
               source={require('../../assets/images/dailyMix1.png')}
               style={{ height: '100%', width: '100%' }}
+            /> */}
+            
+            <View
+              style={{ width: '100%', height: '100%', flexDirection: 'row', flexWrap: 'wrap' }}
+            >
+              <Image 
+                source={require('../../assets/images/albumArt/Banjo.jpeg')}
+                style={{ height: '50%', width: '50%' }}
+              />
+              <Image 
+                source={require('../../assets/images/albumArt/BattiGulMeterChalu.jpeg')}
+                style={{ height: '50%', width: '50%' }}
+              />
+              <Image 
+                source={require('../../assets/images/albumArt/Lamberghini.jpeg')}
+                style={{ height: '50%', width: '50%' }}
+              />
+              <Image 
+                source={require('../../assets/images/albumArt/Tashan.jpeg')}
+                style={{ height: '50%', width: '50%' }}
+              />
+            </View>
+            <Image 
+              source={require('../../assets/images/dailyMixFrame.png')}
+              style={{ height: '100%', width: '100%', position: 'absolute', zIndex: 2 }}
             />
           </View>
           <Text style={styles.madeForYouContainerText}>
             Pritam, Arijit Singh, Anupam Roy and more
           </Text>
+        </View>
+
+        <View style={styles.recommendedForYouContainer}>
+          <Text style={styles.recommendedForYouContainerTitle}>
+            Recommended for you
+          </Text>
+          <ScrollView
+            horizontal={true}
+            showsHorizontalScrollIndicator={false}
+          >
+            {RecommendedAlbumBlockDatas}
+          </ScrollView>
         </View>
 
         <View style={styles.popularContainer}>
@@ -102,41 +155,84 @@ const HomeScreen = () => {
 
 
 
-        {/* <Text style={styles.showsToTryTitle}>
-          Shows to try
-        </Text>
-        <View style={styles.toGetYouStartedAlbumsContainer}>
+        <View style={styles.trendingContainer}>
+          <Text style={styles.trendingContainerTitle}>
+            Popular and Trending
+          </Text>
           <ScrollView
             horizontal={true}
             showsHorizontalScrollIndicator={false}
           >
-            <View style={styles.showsToTryBlockContainer}>
-              <View style={[styles.showsToTryArtContainer, { borderRadius: 10 }]}>
-
+            <TrendingBlock />
+            <TrendingBlock />
+            <TrendingBlock />
+            {/* <View style={styles.trendingBlock}>
+              <View style={styles.trendingBlockImgContainer}>
+                <View style={styles.trendingBlockImgContainerMain} />
+                <View style={{ position: 'absolute', padding: 7, zIndex: 2 }}>
+                  <Image 
+                    source={require('../../assets/icons/spotify.png')}
+                    style={{ height: 17, width: 17, opacity: 0.5 }}
+                  />
+                </View>
               </View>
-
+              <View style={styles.trendingBlockArtistsNamesContainer}>
+                <Text 
+                  style={styles.trendingBlockArtistsNames}
+                  numberOfLines={2}
+                >
+                  Diljit Doshanjh, Guru Randhawa, B Parak, Arijit SIngh
+                </Text>
+              </View>
             </View>
 
-            <View style={styles.showsToTryBlockContainer}>
-              <View style={[styles.showsToTryArtContainer, { borderRadius: 10 }]}>
-
+            <View style={styles.trendingBlock}>
+              <View style={styles.trendingBlockImgContainer}>
+                <View style={styles.trendingBlockImgContainerMain} />
+                <View style={{ position: 'absolute', padding: 7, zIndex: 2 }}>
+                  <Image 
+                    source={require('../../assets/icons/spotify.png')}
+                    style={{ height: 17, width: 17, opacity: 0.5 }}
+                  />
+                </View>
               </View>
-
+              <View style={styles.trendingBlockArtistsNamesContainer}>
+                <Text 
+                  style={styles.trendingBlockArtistsNames}
+                  numberOfLines={2}
+                >
+                  Diljit Doshanjh, Guru Randhawa, B Parak, Arijit SIngh
+                </Text>
+              </View>
             </View>
 
-            <View style={styles.showsToTryBlockContainer}>
-              <View style={[styles.showsToTryArtContainer, { borderRadius: 10 }]}>
-
+            <View style={styles.trendingBlock}>
+              <View style={styles.trendingBlockImgContainer}>
+                <View style={styles.trendingBlockImgContainerMain} />
+                <View style={{ position: 'absolute', padding: 7, zIndex: 2 }}>
+                  <Image 
+                    source={require('../../assets/icons/spotify.png')}
+                    style={{ height: 17, width: 17, opacity: 0.5 }}
+                  />
+                </View>
               </View>
+              <View style={styles.trendingBlockArtistsNamesContainer}>
+                <Text 
+                  style={styles.trendingBlockArtistsNames}
+                  numberOfLines={2}
+                >
+                  Diljit Doshanjh, Guru Randhawa, B Parak, Arijit SIngh
+                </Text>
+              </View>
+            </View> */}
 
-            </View>
 
           </ScrollView>
-        </View> */}
+
+        </View>
 
 
-
-
+        <View style={{ width: '100%', height: 50 }} />
       </ScrollView>
 
     </View>
@@ -172,19 +268,14 @@ const styles = StyleSheet.create({
     fontSize: 25
   },  
   gearIcon: {
-    height: screenHeight > 640 ? 28 : 20 ,
-    width: screenHeight > 640 ? 28 : 20 
-  },
-  toGetYouStartedAlbumsContainer: {
-    width: '100%',
-    // backgroundColor: 'blue',
-    height: 230,
+    height: screenHeight > 640 ? 22 : 20 ,
+    width: screenHeight > 640 ? 22 : 20 
   },
   madeForYouContainer: {
     width: '100%',
-    height: screenHeight > 640 ? 415 : 380,
-    paddingTop: 35,
-    backgroundColor: '#141414'
+    height: screenHeight > 640 ? 400 : 380,
+    paddingTop: screenHeight > 640 ? 30 : 35,
+    // backgroundColor: '#141414'
   },
   madeForYouAlbum: {
     marginLeft: 'auto',
@@ -201,14 +292,6 @@ const styles = StyleSheet.create({
     textAlign: 'center', 
     marginTop: screenHeight > 640 ? 20 : 18, 
   },
-  showsToTryTitle: { 
-    color: '#fff', 
-    fontSize: 22, 
-    fontFamily: 'Product Sans Bold 700', 
-    textAlign: 'left',
-    paddingLeft: 18,
-    paddingBottom: 20 
-  },
   popularContainer: {
     width: '100%',
     height: screenHeight > 640 ? 230 : 220,
@@ -222,20 +305,55 @@ const styles = StyleSheet.create({
     fontSize: 25, 
     fontFamily: 'Product Sans Bold 700', 
     textAlign: 'left',
-    marginBottom: screenHeight > 640 ? 25 : 20,
+    marginBottom: screenHeight > 640 ? 22 : 20,
     marginLeft: screenHeight > 640 ? 18 : 15
   },
-  showsToTryBlockContainer: {
-    height: 200,
-    width: 150,
-    // backgroundColor: 'red',
-    marginLeft: 18
-  },
-  showsToTryArtContainer: {
+  recommendedForYouContainer: {
+    height: screenHeight > 640 ? 267 : 250,
     width: '100%',
-    height: 150,
-    backgroundColor: 'blue'
-  }
+    // backgroundColor: 'green',
+    marginBottom: 30
+  },
+  recommendedForYouContainerTitle: {
+    color: '#fff',
+    fontSize: 17,
+    fontFamily: 'Product Sans Bold 700',
+    textAlign: 'center',
+    marginBottom: 25
+  },
+  trendingContainer: {
+    width: '100%',
+    height: 280, //280
+    // backgroundColor: 'red'
+  },
+  trendingContainerTitle: {
+    padding: screenHeight > 640 ? 15 : 15,
+    color: '#fff',
+    fontFamily: 'Product Sans Bold 700',
+    fontSize: 25,
+    paddingBottom: 20
+  },
+  // trendingBlock: {
+  //   width: screenHeight > 640 ? 160 : 140,
+  //   height: screenHeight > 640 ? 223 : 205,
+  //   // backgroundColor: 'green',
+  //   marginLeft: screenHeight > 640 ? 18 : 15,
+  // },
+  // trendingBlockImgContainer: {
+  //   width: screenHeight > 640 ? 160 : 140,
+  //   height: screenHeight > 640 ? 160 : 140,
+  //   backgroundColor: 'blue'
+  // },
+  // trendingBlockArtistsNamesContainer: {
+  //   width: '100%'
+  // },
+  // trendingBlockArtistsNames: {
+  //   color: '#ffffff99',
+  //   fontSize: 13,
+  //   fontFamily: 'Product-Sans-Regular',
+  //   marginTop: 18
+  // }
+  
 
 })
 

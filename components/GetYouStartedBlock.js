@@ -34,17 +34,37 @@ const GetYouStartedBlock = (props) => {
           />
         </View>
         <View style={styles.albumArtContainerTitleContainer}>
-          <Text style={styles.albumArtContainerMainTitle}>
-            {props.albumMainTitle}
-          </Text>
+          <View style={styles.albumArtContainerMainTitleView}>
+            <Text 
+              style={styles.albumArtContainerMainTitle}
+              numberOfLines={1}
+            >
+              {props.albumMainTitle}
+            </Text>
+          </View>
           <Text style={styles.albumArtContainerSubTitle}>
             {props.albumSubTitle}
           </Text>
         </View>
         <View style={styles.albumArtContainerView}>
-          <View style={styles.albumArtStart} />
-          <View style={styles.albumArtMiddle}  />
-          <View  style={styles.albumArtEnd} />
+          <View style={styles.albumArtStart}>
+            <Image 
+              source={props.albumArtStartImg}
+              style={{ height: '100%', width: '100%' }}
+            />
+          </View>
+          <View style={styles.albumArtMiddle}>
+            <Image 
+              source={props.albumArtMiddleImg}
+              style={{ height: '100%', width: '100%' }}
+            />
+          </View>
+          <View  style={styles.albumArtEnd}>
+            <Image 
+              source={props.albumArtEndImg}
+              style={{ height: '100%', width: '100%' }}
+            />
+          </View>
         </View>
       </LinearGradient>
       <Text 
@@ -64,7 +84,7 @@ const styles = StyleSheet.create({
     width: screenHeight > 640 ? 165 : 150,
     // backgroundColor: 'green',
     marginLeft: screenHeight > 640 ? 18 : 15,
-    marginRight: screenHeight > 640 ? 5 : 0,
+    marginRight: screenHeight > 640 ? 0 : 0,
   },
   albumArtContainer: {
     width: '100%',
@@ -80,6 +100,16 @@ const styles = StyleSheet.create({
     width: 15,
     opacity: 0.5
   },
+  albumArtContainerTitleContainer: {
+    alignItems: 'center'
+  },
+  albumArtContainerMainTitleView: {
+    width: '100%',
+    // backgroundColor: 'red',
+    justifyContent: 'center',
+    alignItems: 'center',
+    height: screenHeight > 640 ? 22 : 17
+  },
   albumArtContainerMainTitle: {
     textAlign: 'center',
     fontFamily: 'Product Sans Bold 700',
@@ -87,6 +117,12 @@ const styles = StyleSheet.create({
     fontSize: screenHeight > 640 ? 15 : 14,
     textTransform: 'capitalize',
     marginBottom: screenHeight > 640 ? 2.5 : 0,
+    width: '80%',
+    height: 15,
+    // marginLeft: 'auto',
+    // backgroundColor: 'green',
+    flex: 1,
+    // marginRight: 'auto',
   },  
   albumArtContainerSubTitle: {
     textAlign: 'center',
