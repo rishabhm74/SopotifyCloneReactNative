@@ -12,6 +12,11 @@ import {
 import LinearGradient from 'react-native-linear-gradient';
 
 
+const screenWidth = Dimensions.get('window').width;
+const screenHeight = Dimensions.get('window').height;
+
+
+
 const SearchCategoryBlock = (props) => {
   return (
     <TouchableNativeFeedback
@@ -24,7 +29,7 @@ const SearchCategoryBlock = (props) => {
         end={{ x: 1, y: 0 }}
       >
       {/* <View style={[styles.searchCategoryBlock, { backgroundColor: props.bgColor }]}> */}
-        <Text style={{ color: '#fff', fontFamily: 'Product Sans Bold 700', fontSize: 19 }}>
+        <Text style={{ color: '#fff', fontFamily: 'Product Sans Bold 700', fontSize: 18 }}>
           {props.text}
         </Text>
       </LinearGradient>
@@ -34,14 +39,14 @@ const SearchCategoryBlock = (props) => {
 
 const styles = StyleSheet.create({
   searchCategoryBlock: {
-    height: 100,
+    height: screenHeight > 640 ? 100 : 95,
     // backgroundColor: '#eee',
-    width: '43.5%',
+    width: screenHeight > 640 ? '44.5%' : '44%',
     margin: '2%',
     borderRadius: 7,
     marginTop: 0,
     marginBottom: '4.25%',
-    padding: 15,
+    padding: 14,
     paddingLeft: 12.5
   }
 })

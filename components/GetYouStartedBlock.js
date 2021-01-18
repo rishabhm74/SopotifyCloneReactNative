@@ -14,6 +14,10 @@ import LinearGradient from 'react-native-linear-gradient';
 
 
 
+const screenWidth = Dimensions.get('window').width;
+const screenHeight = Dimensions.get('window').height;
+
+
 const GetYouStartedBlock = (props) => {
   return (
     <View style={styles.startedAlbumBlock}>
@@ -43,7 +47,10 @@ const GetYouStartedBlock = (props) => {
           <View  style={styles.albumArtEnd} />
         </View>
       </LinearGradient>
-      <Text style={styles.albumArtContainerArtistsText}>
+      <Text 
+        style={styles.albumArtContainerArtistsText}
+        numberOfLines={2}
+      >
         {props.artistsName}
       </Text>
 
@@ -53,20 +60,20 @@ const GetYouStartedBlock = (props) => {
 
 const styles = StyleSheet.create({
   startedAlbumBlock: {
-    height: 220,
-    width: 165,
+    height: screenHeight > 640 ? 220 : 200 ,
+    width: screenHeight > 640 ? 165 : 150,
     // backgroundColor: 'green',
-    marginLeft: 18,
-    marginRight: 5
+    marginLeft: screenHeight > 640 ? 18 : 15,
+    marginRight: screenHeight > 640 ? 5 : 0,
   },
   albumArtContainer: {
     width: '100%',
-    height: 168,
+    height: screenHeight > 640 ? 168 : 150,
     // backgroundColor: '#49A5D8'
   },
   albumArtContainerIconContainer: {
     width: '100%',
-    padding: 7
+    padding: screenHeight > 640 ? 7 : 5,
   },  
   albumArtContainerIconContainerIcon: {
     height: 15,
@@ -77,9 +84,9 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     fontFamily: 'Product Sans Bold 700',
     color: '#fff',
-    fontSize: 15,
+    fontSize: screenHeight > 640 ? 15 : 14,
     textTransform: 'capitalize',
-    marginBottom: 2.5
+    marginBottom: screenHeight > 640 ? 2.5 : 0,
   },  
   albumArtContainerSubTitle: {
     textAlign: 'center',
@@ -120,10 +127,12 @@ const styles = StyleSheet.create({
     color: '#b3b3b3',
     fontSize: 13,
     fontFamily: 'Product-Sans-Regular',
-    paddingTop: 15
+    paddingTop: 15,
+    flex: 1
   },
 
 })
 
 
 export default GetYouStartedBlock;
+

@@ -30,19 +30,19 @@ const FocuedTab = ( props ) => {
     <View style={{ justifyContent: 'center', alignItems: 'center' }}>
       { props.iconName === 'home'? <Image 
         source={require(`../assets/icons/home.png`)}
-        style={{ height: 28, width: 28, marginBottom: 5 }}
+        style={styles.focusedTabIcon}
       /> : null}
       { props.iconName === 'search'? <Image 
         source={require(`../assets/icons/search2.png`)}
-        style={{ height: 28, width: 28, marginBottom: 5 }}
+        style={styles.focusedTabIcon}
       /> : null}
       { props.iconName === 'Your library'? <Image 
         source={require(`../assets/icons/library.png`)}
-        style={{ height: 28, width: 28, marginBottom: 5 }}
+        style={styles.focusedTabIcon}
       /> : null}
       { props.iconName === 'premium'? <Image 
         source={require(`../assets/icons/spotify.png`)}
-        style={{ height: 28, width: 28, marginBottom: 5 }}
+        style={styles.focusedTabIcon}
       /> : null}
       <Text style={{ color: '#fff', fontSize: 10.5, textTransform: 'capitalize', fontFamily:'Product-Sans-Regular' }}>
         {props.iconName}
@@ -56,19 +56,19 @@ const NotFocusedTab = ( props ) => {
     <View style={{ justifyContent: 'center', alignItems: 'center' }}>
       { props.iconName === 'home'? <Image 
         source={require(`../assets/icons/homeOutline.png`)}
-        style={{ height: 28, width: 28, opacity: 0.6 }}
+        style={styles.notFocusedTabIcon}
       /> : null}
       { props.iconName === 'search'? <Image 
         source={require(`../assets/icons/search2.png`)}
-        style={{ height: 28, width: 28, opacity: 0.6 }}
+        style={styles.notFocusedTabIcon}
       /> : null}
       { props.iconName === 'Your library'? <Image 
         source={require(`../assets/icons/library.png`)}
-        style={{ height: 28, width: 28, opacity: 0.6 }}
+        style={styles.notFocusedTabIcon}
       /> : null}
       { props.iconName === 'premium'? <Image 
         source={require(`../assets/icons/spotify.png`)}
-        style={{ height: 28, width: 28, opacity: 0.6 }}
+        style={styles.notFocusedTabIcon}
       /> : null}
       
     </View>
@@ -117,7 +117,7 @@ const MainHomeScreen = () => {
             fontSize: 0
         },
         style: {
-          height: 65,
+          height: screenHeight > 640 ? 65 : 58,
           width: '100%',
           elevation: 0,
           borderTopWidth: 0,
@@ -160,6 +160,16 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center'
   },
+  focusedTabIcon: { 
+    height: screenHeight > 640 ? 28 : 22.5, 
+    width: screenHeight > 640 ? 28 : 22.5, 
+    marginBottom: 5 
+  },
+  notFocusedTabIcon: { 
+    height: screenHeight > 640 ? 28 : 22.5, 
+    width: screenHeight > 640 ? 28 : 22.5, 
+    opacity: 0.6 
+  }
 })
 
 export default MainHomeScreen;

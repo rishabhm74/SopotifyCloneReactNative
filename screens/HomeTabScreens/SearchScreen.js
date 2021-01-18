@@ -65,8 +65,6 @@ const SearchScreen = () => {
 
           {SearchCategoryBlocks}
 
-
-
         </View>
 
       </ScrollView>
@@ -82,21 +80,21 @@ const styles = StyleSheet.create({
     backgroundColor: '#141414',
   },
   searchScreenTitleContainer: {
-    height: 202,
+    height: screenHeight > 640 ? 200 : 175,
     width: '100%',
     backgroundColor: '#141414',
-    padding: 18,
+    padding: 15,
     justifyContent:'flex-end'
   },
   searchTitleText: {
     color: '#fff',
     fontFamily: 'Product Sans Bold 700',
-    fontSize: 35,
-    marginBottom: 17
+    fontSize: screenHeight > 640 ? 35 : 32,
+    marginBottom: screenHeight > 640 ? 17 : 14
   },
   searchBarContainer: {
     width: '100%',
-    height: 55,
+    height: screenHeight > 640 ? 55 : 50,
     backgroundColor: '#fff',
     flexDirection: 'row',
     alignItems: 'center',
@@ -105,29 +103,30 @@ const styles = StyleSheet.create({
   },
   searchBarIconView: {
     height: '100%',
-    width: '13%',
+    width: screenHeight > 640 ? '13%' : '11%',
     justifyContent: 'center',
     alignItems:'flex-end',
-    paddingRight: '2%'
+    paddingRight: screenHeight > 640 ? '2%' : '0.5%'
   },
   searchBarIcon: {
-    height: 28,
-    width: 28
+    height: screenHeight > 640 ? 28 : 25,
+    width: screenHeight > 640 ? 28 : 25,
+    marginBottom: screenHeight > 640 ? 0: 2.5
   },
   searchBarTextInput: {
-    width: '87%',
+    width: screenHeight > 640 ? '87%' : '89%',
     height: '100%',
     color: '#292929',
     fontFamily: 'Product Sans Bold 700',
-    fontSize: 17,
+    fontSize: screenHeight > 640 ? 17 : 15,
   },
   browseAllText: {
     color: '#fff',
     fontFamily: 'Product Sans Bold 700',
     fontSize: 17,
-    padding: 18,
+    padding: 16,
     paddingTop: 5,
-    paddingLeft: 22,
+    paddingLeft: 18,
     paddingBottom: 10
   },
   browseBlocksContainer: {

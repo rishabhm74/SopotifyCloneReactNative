@@ -6,7 +6,7 @@ const GetYouStartedBlockData = [
     colorEnd: '#4fbbf5',
     albumMainTitle: 'Paaraake',
     albumSubTitle: 'malyalam mix',
-    artistsName: 'Sooraj S. Kurup, Najim Arshad, Vijay Yesudas, Har...'
+    artistsName: 'Sooraj S. Kurup, Najim Arshad, Vijay Yesudas and Shreya Ghosal'
   },
   {
     id: 2,
@@ -15,7 +15,7 @@ const GetYouStartedBlockData = [
     colorEnd: '#00ff88',
     albumMainTitle: 'Saarattu vandiyila',
     albumSubTitle: 'tamil mix',
-    artistsName: 'A.R. Rahaman, Thaman S, Yuvan Shankar Raja, Anirud...'
+    artistsName: 'A.R. Rahaman, Thaman S, Yuvan Shankar Raja andAchu Rajamani'
   },
   {
     id: 3,
@@ -24,7 +24,7 @@ const GetYouStartedBlockData = [
     colorEnd: '#d122ce',
     albumMainTitle: 'Taake jhanke',
     albumSubTitle: 'hindi mix',
-    artistsName: 'Arijit Singh, Kushal Chokshi, Pritam, K. Mohan, Amit triv...'
+    artistsName: 'Arijit Singh, Kushal Chokshi, Pritam, K. Mohan and Amit trivedi'
   },
   {
     id: 4,
@@ -33,7 +33,7 @@ const GetYouStartedBlockData = [
     colorEnd: '#ff9d2d',
     albumMainTitle: 'Baarish',
     albumSubTitle: 'hindi mix',
-    artistsName: 'Mohammed Irfan, Amaal Malik, Pritam, Armaan Mali...'
+    artistsName: 'Mohammed Irfan, Amaal Malik, Pritam and Armaan Malik'
   },
 ]
 

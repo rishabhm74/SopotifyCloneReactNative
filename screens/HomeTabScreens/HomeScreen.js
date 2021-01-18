@@ -14,6 +14,8 @@ import LinearGradient from 'react-native-linear-gradient';
 
 import GetYouStartedBlock from '../../components/GetYouStartedBlock';
 import GetYouStartedBlockData from '../../src/data/GetYouStartedBlockData';
+import SuggestedArtistBlock from '../../components/SuggestedArtistBlock';
+import SuggestedArtistBlockData from '../../src/data/SuggestedArtistBlockData';
 
 const screenWidth = Dimensions.get('window').width;
 const screenHeight = Dimensions.get('window').height;
@@ -31,6 +33,14 @@ const HomeScreen = () => {
       />
     )
 
+  const SuggestedArtistBlocks = SuggestedArtistBlockData.map(suggestedArtist => 
+      <SuggestedArtistBlock 
+        key = {suggestedArtist.id}
+        suggestedArtistImgPath = {suggestedArtist.suggestedArtistImgPath}
+        suggestedArtistName = {suggestedArtist.suggestedArtistName}
+      />
+    )
+
 
   return (
     <View style={styles.mainHomeView}>
@@ -38,10 +48,6 @@ const HomeScreen = () => {
       <ScrollView
         showsVerticalScrollIndicator={false}
       >
-        {/* <LinearGradient 
-          style={{ height: 150, width: '100%' }}
-          colors={[ '#4fbbf525', '#4fbbf525' , '#4fbbf512', '#4fbbf506' , '#14141450' ]}
-        /> */}
         <View style={styles.toGetYouStartedContainer}>
           <View style={styles.toGetYouStartedContainerTitle}>
             <Text style={styles.toGetYouStartedContainerTitleText}>
@@ -77,7 +83,7 @@ const HomeScreen = () => {
               style={{ height: '100%', width: '100%' }}
             />
           </View>
-          <Text style={{ color: '#ffffff99', fontSize: 16, fontFamily: 'Product-Sans-Regular', textAlign: 'center', marginTop: 20 }}>
+          <Text style={styles.madeForYouContainerText}>
             Pritam, Arijit Singh, Anupam Roy and more
           </Text>
         </View>
@@ -90,82 +96,7 @@ const HomeScreen = () => {
             horizontal={true}
             showsHorizontalScrollIndicator={false}
           >
-
-            <View style={styles.popularBlock}>
-              <View style={styles.popularBlockAlbumArt}>
-                <Image 
-                  source={require('../../assets/images/artists/Arijit-Singh.jpeg')}
-                  style={{ height: '100%', width: '100%', marginLeft: 'auto', marginRight: 'auto' }}
-                />
-              </View>
-              <Text style={styles.suggestedArtistsName}>
-                Arijit Singh
-              </Text>
-              <Text>
-
-              </Text>
-            </View>
-
-            <View style={styles.popularBlock}>
-              <View style={styles.popularBlockAlbumArt}>
-                <Image 
-                  source={require('../../assets/images/artists/ARRahman.jpeg')}
-                  style={{ height: '100%', width: '100%' }}
-                />
-              </View>
-              <Text style={styles.suggestedArtistsName}>
-                A. R. Rahman
-              </Text>
-              <Text>
-
-              </Text>
-            </View>
-
-            <View style={styles.popularBlock}>
-              <View style={styles.popularBlockAlbumArt}>
-                <Image 
-                  source={require('../../assets/images/artists/Jubin-Nautiyal.jpeg')}
-                  style={{ height: '100%', width: '100%' }}
-                />
-              </View>
-              <Text style={styles.suggestedArtistsName}>
-              Jubin Nautiyal
-              </Text>
-              <Text>
-
-              </Text>
-            </View>
-
-            <View style={styles.popularBlock}>
-              <View style={styles.popularBlockAlbumArt}>
-                <Image 
-                  source={require('../../assets/images/artists/Rahat-Fateh-Ali-Khan.jpeg')}
-                  style={{ height: '100%', width: '100%' }}
-                />
-              </View>
-              <Text style={styles.suggestedArtistsName}>
-              Rahat Fateh Ali Khan
-              </Text>
-              <Text>
-
-              </Text>
-            </View>
-
-            <View style={styles.popularBlock}>
-              <View style={styles.popularBlockAlbumArt}>
-                <Image 
-                  source={require('../../assets/images/artists/Sunidhi-Chauhan.jpeg')}
-                  style={{ height: '100%', width: '100%' }}
-                />
-              </View>
-              <Text style={styles.suggestedArtistsName}>
-              Sunidhi Chauhan
-              </Text>
-              <Text>
-
-              </Text>
-            </View>
-
+            {SuggestedArtistBlocks}
           </ScrollView>
         </View>
 
@@ -221,17 +152,17 @@ const styles = StyleSheet.create({
   },
   toGetYouStartedContainer: {
     width: '100%',
-    height: 350,
+    height: screenHeight > 640 ? 350 : 315 ,
     // backgroundColor: 'red',
     // padding: 18,
-    paddingTop: 60
+    paddingTop: screenHeight > 640 ? 60 : 65
   },
   toGetYouStartedContainerTitle: {
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    marginBottom: 25,
-    padding: 18,
+    marginBottom: screenHeight > 640 ? 25 : 20 ,
+    padding: screenHeight > 640 ? 18 : 15,
     paddingTop: 0,
     paddingBottom: 0
   },  
@@ -241,34 +172,34 @@ const styles = StyleSheet.create({
     fontSize: 25
   },  
   gearIcon: {
-    height: 28,
-    width: 28
+    height: screenHeight > 640 ? 28 : 20 ,
+    width: screenHeight > 640 ? 28 : 20 
   },
   toGetYouStartedAlbumsContainer: {
     width: '100%',
     // backgroundColor: 'blue',
     height: 230,
   },
-  
-
-
-
-
-
-
   madeForYouContainer: {
     width: '100%',
-    height: 415,
+    height: screenHeight > 640 ? 415 : 380,
     paddingTop: 35,
-    // backgroundColor: 'green'
+    backgroundColor: '#141414'
   },
   madeForYouAlbum: {
     marginLeft: 'auto',
     marginRight: 'auto',
-    backgroundColor: 'red',
-    height: 250,
-    width: 250,
+    // backgroundColor: 'red',
+    height: screenHeight > 640 ? 220 : 210,
+    width: screenHeight > 640 ? 220 : 210,
     marginTop: 25
+  },
+  madeForYouContainerText: { 
+    color: '#ffffff99', 
+    fontSize: screenHeight > 640 ? 16 : 15, 
+    fontFamily: 'Product-Sans-Regular', 
+    textAlign: 'center', 
+    marginTop: screenHeight > 640 ? 20 : 18, 
   },
   showsToTryTitle: { 
     color: '#fff', 
@@ -280,7 +211,7 @@ const styles = StyleSheet.create({
   },
   popularContainer: {
     width: '100%',
-    height: 230,
+    height: screenHeight > 640 ? 230 : 220,
     // backgroundColor: 'red',
     // padding: 18,
     marginBottom: 30,
@@ -291,29 +222,8 @@ const styles = StyleSheet.create({
     fontSize: 25, 
     fontFamily: 'Product Sans Bold 700', 
     textAlign: 'left',
-    marginBottom: 25,
-    marginLeft: 18
-  },
-  popularBlock: {
-    height: 190,
-    width: 135,
-    // backgroundColor: 'green',
-    marginLeft: 20,
-
-  },
-  popularBlockAlbumArt: {
-    width: 135,
-    height: 135,
-    // backgroundColor: 'red',
-    borderRadius: 300,
-    overflow: 'hidden',
-  },
-  suggestedArtistsName: {
-    color: '#fff',
-    textAlign: 'center',
-    fontSize: 15,
-    fontFamily: 'Product Sans Bold 700',
-    marginTop: 12
+    marginBottom: screenHeight > 640 ? 25 : 20,
+    marginLeft: screenHeight > 640 ? 18 : 15
   },
   showsToTryBlockContainer: {
     height: 200,
