@@ -19,7 +19,7 @@ import SuggestedArtistBlockData from '../../src/data/SuggestedArtistBlockData';
 import RecommendedAlbumBlock from '../../components/RecommendedAlbumBlock';
 import RecommendedAlbumBlockData from '../../src/data/RecommendedAlbumBlockData';
 import TrendingBlock from '../../components/TrendingBlock';
-
+import TrendingBlockData from '../../src/data/TrendingBlockData';
 
 
 const screenWidth = Dimensions.get('window').width;
@@ -55,6 +55,18 @@ const HomeScreen = () => {
         albumArt = {recommendedAlbum.albumArt}
         albumTitle = {recommendedAlbum.albumTitle}
         albumArtists = {recommendedAlbum.albumArtists}
+      />
+    )
+
+  const TrendingBlockDatas = TrendingBlockData.map(trendingAlbum => 
+      <TrendingBlock 
+        key = {trendingAlbum.id}
+        trendingArtitsNames = {trendingAlbum.trendingArtitsNames}
+        trendingImg = {trendingAlbum.trendingImg}
+        trendingGrad = {trendingAlbum.trendingGrad}
+        mainText = {trendingAlbum.mainText}
+        subText = {trendingAlbum.subText}
+        subTextColor = {trendingAlbum.subTextColor}
       />
     )
 
@@ -163,68 +175,7 @@ const HomeScreen = () => {
             horizontal={true}
             showsHorizontalScrollIndicator={false}
           >
-            <TrendingBlock />
-            <TrendingBlock />
-            <TrendingBlock />
-            {/* <View style={styles.trendingBlock}>
-              <View style={styles.trendingBlockImgContainer}>
-                <View style={styles.trendingBlockImgContainerMain} />
-                <View style={{ position: 'absolute', padding: 7, zIndex: 2 }}>
-                  <Image 
-                    source={require('../../assets/icons/spotify.png')}
-                    style={{ height: 17, width: 17, opacity: 0.5 }}
-                  />
-                </View>
-              </View>
-              <View style={styles.trendingBlockArtistsNamesContainer}>
-                <Text 
-                  style={styles.trendingBlockArtistsNames}
-                  numberOfLines={2}
-                >
-                  Diljit Doshanjh, Guru Randhawa, B Parak, Arijit SIngh
-                </Text>
-              </View>
-            </View>
-
-            <View style={styles.trendingBlock}>
-              <View style={styles.trendingBlockImgContainer}>
-                <View style={styles.trendingBlockImgContainerMain} />
-                <View style={{ position: 'absolute', padding: 7, zIndex: 2 }}>
-                  <Image 
-                    source={require('../../assets/icons/spotify.png')}
-                    style={{ height: 17, width: 17, opacity: 0.5 }}
-                  />
-                </View>
-              </View>
-              <View style={styles.trendingBlockArtistsNamesContainer}>
-                <Text 
-                  style={styles.trendingBlockArtistsNames}
-                  numberOfLines={2}
-                >
-                  Diljit Doshanjh, Guru Randhawa, B Parak, Arijit SIngh
-                </Text>
-              </View>
-            </View>
-
-            <View style={styles.trendingBlock}>
-              <View style={styles.trendingBlockImgContainer}>
-                <View style={styles.trendingBlockImgContainerMain} />
-                <View style={{ position: 'absolute', padding: 7, zIndex: 2 }}>
-                  <Image 
-                    source={require('../../assets/icons/spotify.png')}
-                    style={{ height: 17, width: 17, opacity: 0.5 }}
-                  />
-                </View>
-              </View>
-              <View style={styles.trendingBlockArtistsNamesContainer}>
-                <Text 
-                  style={styles.trendingBlockArtistsNames}
-                  numberOfLines={2}
-                >
-                  Diljit Doshanjh, Guru Randhawa, B Parak, Arijit SIngh
-                </Text>
-              </View>
-            </View> */}
+            {TrendingBlockDatas}
 
 
           </ScrollView>
@@ -327,33 +278,13 @@ const styles = StyleSheet.create({
     // backgroundColor: 'red'
   },
   trendingContainerTitle: {
-    padding: screenHeight > 640 ? 15 : 15,
+    padding: screenHeight > 640 ? 18 : 15,
     color: '#fff',
     fontFamily: 'Product Sans Bold 700',
     fontSize: 25,
     paddingBottom: 20
   },
-  // trendingBlock: {
-  //   width: screenHeight > 640 ? 160 : 140,
-  //   height: screenHeight > 640 ? 223 : 205,
-  //   // backgroundColor: 'green',
-  //   marginLeft: screenHeight > 640 ? 18 : 15,
-  // },
-  // trendingBlockImgContainer: {
-  //   width: screenHeight > 640 ? 160 : 140,
-  //   height: screenHeight > 640 ? 160 : 140,
-  //   backgroundColor: 'blue'
-  // },
-  // trendingBlockArtistsNamesContainer: {
-  //   width: '100%'
-  // },
-  // trendingBlockArtistsNames: {
-  //   color: '#ffffff99',
-  //   fontSize: 13,
-  //   fontFamily: 'Product-Sans-Regular',
-  //   marginTop: 18
-  // }
-  
+
 
 })
 
