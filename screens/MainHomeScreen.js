@@ -80,7 +80,7 @@ const MainHomeScreen = () => {
   return (
 
     <MainHomeTab.Navigator
-      initialRouteName="LibraryScreen"
+      initialRouteName="PremiumScreen"
       screenOptions={({ route }) => ({
         tabBarIcon: ({ focused, color, size }) => {
           let iconName;

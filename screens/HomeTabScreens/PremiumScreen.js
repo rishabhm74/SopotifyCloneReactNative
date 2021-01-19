@@ -5,7 +5,8 @@ import {
   StatusBar,
   Button,
   Dimensions,
-  Text
+  Text,
+  ScrollView
 } from 'react-native';
 
 
@@ -17,9 +18,15 @@ const PremiumScreen = () => {
   return (
     <View style={styles.mainPremiumView}>
       <StatusBar barStyle="light-content" translucent={true} backgroundColor="#14141499" />
-      <Text style={{ color: '#fff' }}>
-        Premium
-      </Text>
+      <View style={{ flex: 1 }}>
+        <ScrollView>
+          <View style={styles.premiumScreenTitleContainer}>
+            <Text style={styles.premiumScreenTitleText}>
+              Try Premium free for {'\n'} 1 month
+            </Text>
+          </View>
+        </ScrollView>
+      </View>
     </View>
   )
 }
@@ -30,8 +37,19 @@ const styles = StyleSheet.create({
     width: screenWidth,
     height: screenHeight,
     backgroundColor: '#141414',
-    justifyContent: 'center',
-    alignItems: 'center'
+  },
+  premiumScreenTitleContainer: {
+    width: '100%',
+    height: 205,
+    // backgroundColor: 'red',
+    justifyContent:'flex-end',
+    paddingBottom: 15
+  },
+  premiumScreenTitleText: {
+    color: '#fff',
+    fontFamily: 'Product Sans Bold 700',
+    fontSize: 29,
+    textAlign: 'center'
   }
 })
 
