@@ -27,10 +27,10 @@ const TrendingBlock = (props) => {
             style={{ width: '100%', height: '100%' }}
           />
         </View>
-        <View style={{ position: 'absolute', padding: 7, zIndex: 3 }}>
+        <View style={{ position: 'absolute', padding: screenHeight > 640 ? 7 : 5, zIndex: 3 }}>
           <Image 
             source={require('../assets/icons/spotify.png')}
-            style={{ height: 17, width: 17, opacity: 0.5 }}
+            style={{ height: 15, width: 15, opacity: 0.5 }}
           />
         </View>
         <LinearGradient
@@ -42,7 +42,7 @@ const TrendingBlock = (props) => {
           </Text>
           <Text style={{ 
             fontFamily: 'Product Sans Bold 700',
-            fontSize: 19,
+            fontSize: 17,
             color: props.subTextColor
            }}>
             {props.subText}

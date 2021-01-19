@@ -33,11 +33,11 @@ const FocuedTab = ( props ) => {
         style={styles.focusedTabIcon}
       /> : null}
       { props.iconName === 'search'? <Image 
-        source={require(`../assets/icons/search2.png`)}
+        source={require(`../assets/icons/search2Bold.png`)}
         style={styles.focusedTabIcon}
       /> : null}
       { props.iconName === 'Your library'? <Image 
-        source={require(`../assets/icons/library.png`)}
+        source={require(`../assets/icons/libraryBold.png`)}
         style={styles.focusedTabIcon}
       /> : null}
       { props.iconName === 'premium'? <Image 
@@ -80,7 +80,7 @@ const MainHomeScreen = () => {
   return (
 
     <MainHomeTab.Navigator
-      initialRouteName="HomeScreen"
+      initialRouteName="LibraryScreen"
       screenOptions={({ route }) => ({
         tabBarIcon: ({ focused, color, size }) => {
           let iconName;
