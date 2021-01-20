@@ -10,10 +10,12 @@ import {
 } from 'react-native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import Icon from 'react-native-vector-icons/Foundation';
+
 import HomeScreen from './HomeTabScreens/HomeScreen';
 import SearchScreen from './HomeTabScreens/SearchScreen';
 import LibraryScreen from './HomeTabScreens/LibraryScreen';
 import PremiumScreen from './HomeTabScreens/PremiumScreen';
+import LocalMusicScreen from './HomeTabScreens/LocalMusicScreen';
 // import Ionicons from 'react-native-ionicons';
 
 
@@ -44,6 +46,10 @@ const FocuedTab = ( props ) => {
         source={require(`../assets/icons/spotify.png`)}
         style={styles.focusedTabIcon}
       /> : null}
+      { props.iconName === 'Local'? <Image 
+        source={require(`../assets/icons/localBold.png`)}
+        style={styles.focusedTabIcon}
+      /> : null}
       <Text style={{ color: '#fff', fontSize: 10.5, textTransform: 'capitalize', fontFamily:'Product-Sans-Regular' }}>
         {props.iconName}
       </Text>
@@ -70,6 +76,10 @@ const NotFocusedTab = ( props ) => {
         source={require(`../assets/icons/spotify.png`)}
         style={styles.notFocusedTabIcon}
       /> : null}
+      { props.iconName === 'Local'? <Image 
+        source={require(`../assets/icons/local.png`)}
+        style={styles.notFocusedTabIcon}
+      /> : null}
       
     </View>
   )
@@ -80,7 +90,7 @@ const MainHomeScreen = () => {
   return (
 
     <MainHomeTab.Navigator
-      initialRouteName="PremiumScreen"
+      initialRouteName="HomeScreen"
       screenOptions={({ route }) => ({
         tabBarIcon: ({ focused, color, size }) => {
           let iconName;
@@ -93,6 +103,8 @@ const MainHomeScreen = () => {
             iconName = focused ? 'Your library' : 'Your library'
           } else if ( route.name === 'PremiumScreen' ) {
             iconName = focused ? 'premium' : 'premium'
+          } else if ( route.name === 'LocalMusicScreen' ) {
+            iconName = focused ? 'Local' : 'Local'
           } 
 
           if ( focused ) {
@@ -136,6 +148,10 @@ const MainHomeScreen = () => {
       <MainHomeTab.Screen 
         name="SearchScreen"
         component={SearchScreen}
+      />
+      <MainHomeTab.Screen 
+        name="LocalMusicScreen"
+        component={LocalMusicScreen}
       />
       <MainHomeTab.Screen 
         name="LibraryScreen"

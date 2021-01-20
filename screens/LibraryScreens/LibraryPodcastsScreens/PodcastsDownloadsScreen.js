@@ -24,7 +24,7 @@ const PodcastsDownloadsScreen = () => {
           Tap  <Image 
             source={require('../../../assets/icons/download.png')}
             style={styles.downloadImg}
-          />  on an episode tolisten without a connection.
+          />  on an episode to listen without a connection.
         </Text>
         <TouchableNativeFeedback>
           <View style={styles.createPlaylistView}>

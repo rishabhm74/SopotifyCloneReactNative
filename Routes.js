@@ -17,6 +17,7 @@ import MainAppStack from './navigation/MainAppStack';
 
 
 import MainHomeScreen from './screens/MainHomeScreen';
+import SettingsScreen from './screens/HomeTabScreens/SettingsScreen'
 
 
 
@@ -43,8 +44,9 @@ const Routes = () => {
 
   return (
     <NavigationContainer>
-          {/* { user ?   <MainAppStack /> : <AuthStack />} */}
-          <MainHomeScreen />
+          { user ?   <MainAppStack /> : <AuthStack />}
+          {/* <MainHomeScreen /> */}
+          {/* <SettingsScreen /> */}
     </NavigationContainer>
   )
 }

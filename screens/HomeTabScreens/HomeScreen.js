@@ -11,6 +11,7 @@ import {
   TouchableOpacity
 } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
+import { createStackNavigator, CardStyleInterpolators } from '@react-navigation/stack'
 
 import GetYouStartedBlock from '../../components/GetYouStartedBlock';
 import GetYouStartedBlockData from '../../src/data/GetYouStartedBlockData';
@@ -20,13 +21,17 @@ import RecommendedAlbumBlock from '../../components/RecommendedAlbumBlock';
 import RecommendedAlbumBlockData from '../../src/data/RecommendedAlbumBlockData';
 import TrendingBlock from '../../components/TrendingBlock';
 import TrendingBlockData from '../../src/data/TrendingBlockData';
+import SettingsScreen from '../HomeTabScreens/SettingsScreen';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
 
 const screenWidth = Dimensions.get('window').width;
 const screenHeight = Dimensions.get('window').height;
 
 
-const HomeScreen = () => {
+const HomeScreenStack = createStackNavigator();
+
+const HomeScreenMain = ({ navigation }) => {
   const getYouStartedBlocks = GetYouStartedBlockData.map(startedBlock   =>  <GetYouStartedBlock 
         key = {startedBlock.id}
         colorStart = {startedBlock.colorStart}
@@ -77,12 +82,18 @@ const HomeScreen = () => {
       <ScrollView
         showsVerticalScrollIndicator={false}
       >
+        <Image 
+          source={require('../../assets/images/homeBgPink.png')}
+          style={styles.colorBg}
+        />
         <View style={styles.toGetYouStartedContainer}>
           <View style={styles.toGetYouStartedContainerTitle}>
             <Text style={styles.toGetYouStartedContainerTitleText}>
               To get you started
             </Text>
-            <TouchableOpacity>
+            <TouchableOpacity
+              onPress={() => navigation.navigate('SettingsScreen')}
+            >
               <Image 
                 source={require('../../assets/icons/gear.png')}
                 style={styles.gearIcon}
@@ -190,6 +201,33 @@ const HomeScreen = () => {
   )
 }
 
+const HomeScreen = () => {
+  return (
+    <HomeScreenStack.Navigator 
+      initialRouteName='HomeScreenMain'
+      screenOptions={{
+        cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS
+      }}
+    >
+      <HomeScreenStack.Screen 
+        name='HomeScreenMain'
+        component={HomeScreenMain}
+        options={{ 
+          header: () => null
+        }}
+        
+      />
+      <HomeScreenStack.Screen 
+        name='SettingsScreen'
+        component={SettingsScreen} 
+        options={{ 
+          header: () => null
+        }}
+      />
+    </HomeScreenStack.Navigator>
+  )
+}
+
 const styles = StyleSheet.create({
   mainHomeView: {
     flex: 1,
@@ -197,12 +235,18 @@ const styles = StyleSheet.create({
     height: screenHeight,
     backgroundColor: '#141414',
   },
+  colorBg: {
+    width: '100%',
+    height: 250,
+    position: 'absolute',
+
+  },
   toGetYouStartedContainer: {
     width: '100%',
-    height: screenHeight > 640 ? 350 : 315 ,
+    height: screenHeight > 640 ? 360 : 315 ,
     // backgroundColor: 'red',
     // padding: 18,
-    paddingTop: screenHeight > 640 ? 60 : 65
+    paddingTop: screenHeight > 640 ? 65 : 65
   },
   toGetYouStartedContainerTitle: {
     flexDirection: 'row',
