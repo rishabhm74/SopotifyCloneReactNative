@@ -195,7 +195,7 @@ const PremiumScreen = () => {
           </LinearGradient>
 
           <LinearGradient 
-            style={[styles.bigCardMain, { height: 300 }]}
+            style={[styles.bigCardMain, { height: screenHeight > 640 ? 300 : 290 }]}
             colors={[ '#045746', '#1bc47a' ]}
             start={{ x: 0, y: 0 }}
             end={{ x: 1, y: 1 }}
@@ -216,7 +216,7 @@ const PremiumScreen = () => {
               </View>
             </View>
 
-            <Text style={[styles.infoText, { marginTop: 45 }]}>
+            <Text style={[styles.infoText, { marginTop: screenHeight > 640 ? 45 : 50 }]}>
               Try Premium free fot 1 month {'\n'}
               Subscribe with card, auto-renew {'\n'}
               Download to listen offline, cancel anytime
@@ -251,11 +251,11 @@ const styles = StyleSheet.create({
   },
   premiumScreenTitleContainer: {
     width: '100%',
-    height: 185,
+    height: screenHeight > 640 ? 185 : 180,
     // backgroundColor: 'red',
     justifyContent:'flex-end',
     paddingBottom: 13,
-    marginBottom: 25
+    marginBottom: screenHeight > 640 ? 25 : 18
   },
   premiumScreenTitleText: {
     color: '#fff',
@@ -264,8 +264,8 @@ const styles = StyleSheet.create({
     textAlign: 'center'
   },
   mainCard: {
-    height: 150,
-    width: 330,
+    height: screenHeight > 640 ? 150 : 140,
+    width: screenHeight > 640 ? 330 : 310,
     backgroundColor: '#393939',
     flexDirection: 'row',
     borderRadius: 10,
@@ -342,21 +342,23 @@ const styles = StyleSheet.create({
   createPlaylistView: {
     borderRadius: 300,
     backgroundColor: '#fff',
-    padding: 14.5,
+    padding: screenHeight > 640 ? 14.5 : 14,
     // backgroundColor: 'red',
-    width: 220
+    // width: 220
+    paddingLeft: screenHeight > 640 ? 50 : 45,
+    paddingRight: screenHeight > 640 ? 50 : 45
   },
   createPlaylistText: {
     color: '#000',
     textAlign: 'center',
     fontFamily: 'Product Sans Bold 700',
-    fontSize: 15,
+    fontSize: screenHeight > 640 ? 15 : 14,
     textTransform: 'uppercase',
     letterSpacing: 2
   },
   spotifyFreeBlock: {
     backgroundColor: '#393939',
-    height: 75,
+    height: screenHeight > 640 ?  75 : 70,
     width: '91%',
     marginLeft: 'auto',
     marginRight: 'auto',
@@ -365,9 +367,9 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    paddingLeft: 30,
-    paddingRight: 30,
-    marginBottom: 38,
+    paddingLeft: screenHeight > 640 ? 30 : 25,
+    paddingRight: screenHeight > 640 ? 30 : 25,
+    marginBottom: screenHeight > 640 ? 38 : 35,
   },
   spotifyFreeText: {
     fontFamily: 'Product Sans Bold 700',
@@ -382,16 +384,16 @@ const styles = StyleSheet.create({
     letterSpacing: 2.5
   },
   bigCardMain: {
-    height: 280,
+    height: screenHeight > 640 ? 280 : 270,
     width: '91%',
     marginLeft: 'auto',
     marginRight: 'auto',
     borderRadius: 10,
-    marginBottom: 38
+    marginBottom: screenHeight > 640 ? 38 : 35
   },
   cardHeader: {
     // backgroundColor: 'red',
-    height: 80,
+    height: screenHeight > 640 ? 80: 75,
     width: '100%',
     justifyContent: 'space-between',
     flexDirection: 'row'
@@ -430,7 +432,7 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     fontFamily: 'Product-Sans-Regular',
     fontSize: 14.5,
-    marginTop: 40,
+    marginTop: screenHeight > 640 ?  40 : 45,
     lineHeight: 18
   },
   viewPlansButton: {

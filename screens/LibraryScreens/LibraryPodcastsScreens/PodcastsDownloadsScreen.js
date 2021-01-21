@@ -80,15 +80,15 @@ const styles = StyleSheet.create({
   createPlaylistView: {
     borderRadius: 300,
     backgroundColor: '#fff',
-    padding: 16.5,
-    paddingLeft: 50,
-    paddingRight: 50,
+    padding: screenHeight > 640 ? 16.5 : 14,
+    paddingLeft: screenHeight > 640 ?  50 : 45,
+    paddingRight: screenHeight > 640 ? 50 : 45,
   },
   createPlaylistText: {
     color: '#000',
     textAlign: 'center',
     fontFamily: 'Product Sans Bold 700',
-    fontSize: 15,
+    fontSize: screenHeight > 640 ? 15 : 14,
     textTransform: 'uppercase',
     letterSpacing: 2
   }

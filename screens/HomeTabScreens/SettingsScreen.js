@@ -39,6 +39,8 @@ const SettingsScreen = () => {
           })
         } 
       })
+
+    return;
   }, [])
 
   return (
@@ -113,7 +115,7 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     color: '#fff',
     fontFamily: 'Product Sans Bold 700',
-    marginTop: 35,
+    marginTop: screenHeight > 640 ? 35 : 25,
     fontSize: 20
   },
   goPremiumView: {
@@ -124,7 +126,7 @@ const styles = StyleSheet.create({
     paddingRight: 42,
     marginLeft: 'auto',
     marginRight: 'auto',
-    marginTop: 30
+    marginTop: screenHeight > 640 ? 30 : 25
   },
   goPremiumText: {
     color: '#000',
@@ -140,7 +142,7 @@ const styles = StyleSheet.create({
     paddingLeft: 20,
     paddingRight: 20,
     flexDirection: 'row',
-    marginTop: 35
+    marginTop: screenHeight > 640 ? 35 : 25
   },
   userInfoLeft: {
     height: '100%',

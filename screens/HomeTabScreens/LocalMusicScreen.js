@@ -16,9 +16,29 @@ const screenHeight = Dimensions.get('window').height;
 
 
 const LocalMusicScreen = () => {
+
+ 
+
+  // const playSound = () => {
+
+  // }
+
+  // const stopSound = () => {
+  //   sound.stop();
+  // }
+
+
   return (
     <View style={styles.mainLocalMusicView}>
       <StatusBar barStyle="light-content" translucent={true} backgroundColor="#14141499" />
+      {/* <Button 
+        title="play"
+        onPress={() => PlaySound('avicii_sound')}
+      /> */}
+      {/* <Button 
+        title="stop"
+        onPress={() => stopSound()}
+      /> */}
     </View>
   )
 }
@@ -29,6 +49,8 @@ const styles = StyleSheet.create({
     width: screenWidth,
     height: screenHeight,
     backgroundColor: '#141414',
+    justifyContent: 'center',
+    alignItems: 'center'
   },
 
 })

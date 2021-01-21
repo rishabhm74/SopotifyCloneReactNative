@@ -40,7 +40,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     width: '100%',
     // backgroundColor: 'red',
-    height: 110,
+    height: screenHeight > 640 ?  110 : 100,
     // marginTop: 10
   },
   artistImgContainer: {
@@ -51,8 +51,8 @@ const styles = StyleSheet.create({
     alignItems: 'center'
   },
   artistImg: {
-    width: 90,
-    height: 90,
+    width: screenHeight > 640 ?  90 : 80,
+    height: screenHeight > 640 ? 90 : 80,
     borderRadius: 300,
 
   },
@@ -66,7 +66,7 @@ const styles = StyleSheet.create({
   artistNameText: {
     color: '#fff',
     fontFamily: 'Product Sans Bold 700',
-    fontSize: 18
+    fontSize: screenHeight > 640 ? 18 : 16
   }
 })
 
